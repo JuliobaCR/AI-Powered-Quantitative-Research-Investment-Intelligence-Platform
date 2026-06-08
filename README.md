@@ -574,6 +574,215 @@ into a single decision-support system for investors, researchers, and quantitati
 
 ---
 
+## Quantitative Finance & Research Modules
+
+AlphaForge incorporates professional quantitative finance methodologies commonly used by investment banks, asset managers, hedge funds, proprietary trading firms, and quantitative research teams.
+
+---
+
+### Discounted Cash Flow (DCF) Engine
+
+Estimate the intrinsic value of a company by forecasting future cash flows and discounting them to present value.
+
+Features:
+
+- Revenue Growth Forecasting
+- Free Cash Flow Projections
+- Discount Rate Estimation
+- Terminal Value Calculation
+- Sensitivity Analysis
+- Scenario Analysis
+
+Outputs:
+
+- Intrinsic Value
+- Fair Value Range
+- Margin of Safety
+- DCF Confidence Score
+
+---
+
+### Cash Flow Analysis Engine
+
+Evaluate the financial strength of a company through detailed cash flow analysis.
+
+Metrics:
+
+- Operating Cash Flow
+- Free Cash Flow
+- Free Cash Flow Yield
+- Cash Flow Growth
+- Cash Conversion Ratio
+- Capital Expenditures
+
+Outputs:
+
+- Cash Flow Health Score
+- Growth Sustainability Assessment
+- Capital Efficiency Analysis
+
+---
+
+### Portfolio Optimization Engine
+
+Construct portfolios using modern portfolio theory and quantitative optimization methods.
+
+Methods:
+
+- Equal Weight
+- Mean Variance Optimization
+- Risk Parity
+- Minimum Variance Portfolio
+- Black-Litterman Allocation
+
+Outputs:
+
+- Optimal Portfolio Weights
+- Expected Return
+- Expected Volatility
+- Sharpe Ratio
+- Efficient Frontier
+
+---
+
+### Options & Greeks Analytics
+
+Analyze derivatives markets and quantify option sensitivity.
+
+Greeks:
+
+- Delta
+- Gamma
+- Vega
+- Theta
+- Rho
+
+Advanced Analytics:
+
+- Gamma Exposure (GEX)
+- Dealer Positioning
+- Volatility Surface
+- Volatility Smile
+- Open Interest Analysis
+
+Outputs:
+
+- Market Positioning Signals
+- Options Flow Insights
+- Volatility Forecasts
+
+---
+
+### Monte Carlo Simulation Engine
+
+Perform thousands of simulated future market scenarios.
+
+Applications:
+
+- Asset Price Simulation
+- Portfolio Risk Analysis
+- Retirement Scenarios
+- Option Pricing
+- Stress Testing
+
+Features:
+
+- Geometric Brownian Motion
+- Random Walk Simulation
+- Multi-Asset Simulations
+- Scenario Generation
+
+Outputs:
+
+- Probability Distributions
+- Confidence Intervals
+- Risk Scenarios
+- Return Forecast Ranges
+
+---
+
+### Backtesting Framework
+
+Evaluate investment strategies using historical data.
+
+Features:
+
+- Historical Simulation
+- Walk-Forward Validation
+- Transaction Costs
+- Slippage Modeling
+- Benchmark Comparison
+
+Metrics:
+
+- CAGR
+- Sharpe Ratio
+- Sortino Ratio
+- Maximum Drawdown
+- Win Rate
+- Profit Factor
+
+Outputs:
+
+- Strategy Performance Reports
+- Trade Analytics
+- Equity Curves
+
+---
+
+### Factor Modeling Engine
+
+Analyze asset returns using factor-based investing frameworks.
+
+Supported Factors:
+
+- Value
+- Momentum
+- Quality
+- Low Volatility
+- Size
+- Growth
+
+Advanced Models:
+
+- Fama-French Three Factor Model
+- Fama-French Five Factor Model
+- Custom Factor Construction
+
+Outputs:
+
+- Factor Exposure
+- Alpha Attribution
+- Performance Decomposition
+
+---
+
+### Quantitative Risk Analytics
+
+Measure and monitor portfolio risk.
+
+Metrics:
+
+- Value at Risk (VaR)
+- Conditional VaR (CVaR)
+- Maximum Drawdown
+- Beta
+- Correlation Risk
+- Tail Risk
+- Volatility Clustering
+
+Advanced Analysis:
+
+- Stress Testing
+- Scenario Analysis
+- Regime-Based Risk Assessment
+
+Outputs:
+
+- Portfolio Risk Score
+- Tail Risk Assessment
+- Risk Decomposition Reports
+
 # Author
 
 **Julio Ricardo Barrios Amador**
