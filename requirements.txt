@@ -1,0 +1,31 @@
+# Core
+streamlit>=1.35.0
+python-dotenv>=1.0.0
+requests>=2.31.0
+
+# Data
+yfinance>=0.2.40
+finnhub-python>=2.4.20
+pandas>=2.2.0
+numpy>=1.26.0
+polars>=0.20.0
+
+# Visualization
+plotly>=5.22.0
+matplotlib>=3.9.0
+
+# Quant / Finance
+scipy>=1.13.0
+ta>=0.11.0
+cvxpy>=1.4.0
+
+# ML
+scikit-learn>=1.5.0
+xgboost>=2.0.0
+lightgbm>=4.3.0
+hmmlearn>=0.3.2
+torch>=2.2.0
+transformers>=4.40.0
+
+# AI
+anthropic>=0.25.0

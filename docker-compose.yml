@@ -1,0 +1,23 @@
+version: "3.9"
+
+services:
+  alphaforge:
+    build: .
+    container_name: alphaforge_app
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./data:/app/data
+      - ./models:/app/models
+      - ./reports:/app/reports
+    env_file:
+      - .env
+    command: streamlit run src/dashboard/app.py --server.port=8501 --server.address=0.0.0.0
+    restart: unless-stopped
+
+  # Optional: Redis cache for rate-limited API calls
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    restart: unless-stopped
