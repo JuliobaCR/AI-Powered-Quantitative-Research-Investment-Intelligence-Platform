@@ -16,6 +16,7 @@ from functools import lru_cache
 from typing import Optional
 
 import finnhub
+import numpy as np
 import pandas as pd
 import yfinance as yf
 
@@ -67,9 +68,7 @@ def fetch_ohlcv(
 
         df.index = pd.to_datetime(df.index)
         df["Returns"] = df["Close"].pct_change()
-        df["Log_Returns"] = (df["Close"] / df["Close"].shift(1)).apply(
-            lambda x: x if pd.isna(x) else pd.np.log(x) if x > 0 else float("nan")
-        )
+        df["Log_Returns"] = np.log(df["Close"] / df["Close"].shift(1))
         df.dropna(subset=["Returns"], inplace=True)
         df.attrs["ticker"] = ticker
         return df

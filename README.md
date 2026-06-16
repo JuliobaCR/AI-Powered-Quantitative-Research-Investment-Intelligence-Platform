@@ -54,28 +54,43 @@ Market Data (yFinance + Finnhub)
          │     Valuation Engine (DCF + Multiples)
          │
          ├── Market Regime Detection (HMM)
-         ├── Derivatives Analytics (BS Greeks)
-         ├── Forecasting Engine (GBM, LSTM*)
-         ├── Risk Engine (VaR, CVaR, Sharpe)
+         ├── Derivatives Analytics (BS Greeks Surfaces + Options Strategies)
+         ├── Forecasting Engine (GBM · Heston · Merton Jump-Diffusion · LSTM · Transformer)
+         ├── Statistical Analysis (Hurst · GARCH · ADF · Ljung-Box · Jarque-Bera)
+         ├── Risk Engine (VaR · CVaR · Component VaR · Attribution · Stress Testing)
+         ├── Backtesting Engine (SMA · RSI · Parameter Sweeps)
+         ├── Factor Model (Fama-French 5-Factor + Rolling Exposures)
+         ├── Statistical Arbitrage (Cointegration · OU Half-Life · Pairs Signals)
          │
          └── Alpha Scoring System (0–100)
                    │
-           Portfolio Optimizer (Mean-Variance, Risk Parity)
+           Portfolio Optimizer (Mean-Variance · Risk Parity · Black-Litterman)
                    │
-         Streamlit Dashboard (3D Charts, Interactive)
+         Demo Portfolio Engine (Paper Trading · JSON persistence · Live P&L)
+                   │
+         Streamlit Dashboard (3D Mouse-Interactive Charts, 12 Pages)
+         Auto-Refresh (Live Mode) · GitHub-Dark Comfort Theme
 ```
 
 ---
 
-## 📊 Dashboard Modules
+## 📊 Dashboard Modules (12 Pages)
 
 | Page | Description |
 |------|-------------|
-| **Overview** | Live quotes, performance chart, watchlist, regime indicator |
-| **Research** | Fundamentals, DCF sensitivity heatmap, candlestick + RSI + MACD |
-| **Charts 3D** | Volatility surface, Return-Risk-Score scatter, Regime timeline, Rolling correlation |
-| **Portfolio** | Efficient frontier, optimal weights, risk decomposition per ticker |
-| **Alpha Score** | Weighted conviction score, reasoning bullets, invalidation conditions |
+| **📊 Overview** | Live quotes, performance chart, watchlist, regime indicator |
+| **🔬 Research** | Fundamentals, DCF sensitivity heatmap, candlestick + RSI + MACD |
+| **📈 Charts 3D** | Volatility surface, Return-Risk-Score scatter, Regime timeline, Rolling correlation, Greeks Lab (Delta/Gamma/Vega/Theta/Rho surfaces) |
+| **🔮 AI Forecast** | GBM / LSTM / Transformer forecasts with MC-Dropout CIs; Heston stochastic-vol and Merton Jump-Diffusion Monte Carlo; 3D rotatable path fans for all 3 processes |
+| **🧪 Backtesting** | SMA Crossover & RSI Mean Reversion strategies, equity curve vs buy & hold, drawdown, 3D Sharpe parameter-optimization surface |
+| **📐 Factor Lab** | Fama-French 5-Factor OLS regression (alpha, betas, R²), 3D rolling factor-exposure surface |
+| **🔥 Stress Test** | 10 historical scenarios (GFC · COVID · Dot-Com · 2022 Rate Shock · Black Monday · LTCM · EU Debt · Flash Crash · Taper Tantrum · China Devaluation), custom shock, heatmap + 3D scenario × asset P&L surface |
+| **📊 Quant Lab** | Hurst exponent (R/S), GARCH(1,1) conditional vol, rolling autocorrelation, ADF stationarity test, Ljung-Box, Jarque-Bera, return histogram + Q-Q plot, options strategy payoff diagrams (10 strategies) + 3D P&L × spot × DTE surface |
+| **🔄 Pairs Lab** | Engle-Granger cointegration, OU half-life estimation, spread z-score signals, pairs ranking table |
+| **💼 Portfolio** | Efficient frontier, optimal weights (4 strategies), individual risk reports, component VaR, marginal VaR, volatility contribution attribution |
+| **📈 Demo Portfolio** | Paper-trading account ($100,000 initial capital): live P&L tracking, buy/sell order execution, allocation pie, unrealized gain/loss bars, full trade history with CSV export |
+| **⚡ Alpha Score** | Weighted conviction score (0–100), BUY/WAIT/SELL verdict, score breakdown chart |
+| **⚽ Sports Betting** | Real-time odds from 80+ bookmakers (The Odds API): implied probability, no-vig fair odds, Expected Value (EV%) identification, Kelly Criterion bankroll calculator, three-way arbitrage scanner, independent Poisson match-outcome model with score-probability heatmap |
 
 ---
 
@@ -106,14 +121,19 @@ alphaforge/
 │   ├── fundamentals/      # Financial statement analysis
 │   ├── valuation/         # DCF + multiples + sensitivity analysis
 │   ├── regime_detection/  # Hidden Markov Model market regimes
-│   ├── derivatives/       # Black-Scholes Greeks
-│   ├── forecasting/       # ML return forecasting (GBM, LSTM*)
-│   ├── risk/              # VaR, CVaR, Sharpe, drawdown
-│   ├── portfolio/         # Mean-variance, Risk Parity, Min-Var (cvxpy)
+│   ├── derivatives/       # Black-Scholes Greeks + Options Strategy payoff profiles
+│   ├── forecasting/       # GBM · Heston · Jump-Diffusion + LSTM & Transformer
+│   ├── analysis/          # Hurst exponent · GARCH(1,1) · ADF · Ljung-Box · JB test
+│   ├── arbitrage/         # Pairs trading: cointegration · OU half-life · z-score signals
+│   ├── risk/              # VaR · CVaR · Component VaR · Attribution · Stress Testing
+│   ├── portfolio/         # Mean-variance · Risk Parity · Min-Var (cvxpy) + Demo paper-trading
+│   ├── backtesting/       # Strategy backtests (SMA, RSI) + parameter sweeps
+│   ├── factors/           # Fama-French 5-Factor regression + rolling exposures
 │   ├── explainability/    # Alpha Score aggregation
-│   └── dashboard/         # Streamlit app with 3D Plotly charts
+│   └── dashboard/         # Streamlit app (12 pages, 3D Plotly charts, Live Mode)
 ├── config/                # Global settings, API keys management
-├── tests/                 # pytest unit tests
+│   ├── sports/            # Sports betting: The Odds API client, Poisson model, EV/Kelly/arbitrage
+├── tests/                 # pytest unit tests (17 test files)
 ├── data/                  # raw / processed / external data
 ├── models/                # serialized ML models
 ├── notebooks/             # Jupyter research notebooks
@@ -131,6 +151,7 @@ alphaforge/
 |---------|---------|-----------|------|
 | **Finnhub** | Real-time quotes, news | 60 calls/min | [finnhub.io](https://finnhub.io) |
 | **Anthropic** | AI Research Assistant | Pay-per-use | [console.anthropic.com](https://console.anthropic.com) |
+| **The Odds API** | Real-time sports odds (80+ bookmakers) | 500 req/month | [the-odds-api.com](https://the-odds-api.com) |
 | yFinance | Historical data, fundamentals | ✅ Free, no key | Built-in |
 
 ---
@@ -143,10 +164,18 @@ alphaforge/
 - [x] Phase 4 — Alpha Engine (Scoring + Explainability)
 - [x] Phase 5 — Portfolio Layer (Optimization, Efficient Frontier)
 - [x] Phase 6 — Visualization (3D Dashboard, Streamlit)
-- [ ] Phase 7 — Deep Learning (LSTM, Transformer forecasting)
-- [ ] Phase 8 — Backtesting Framework
-- [ ] Phase 9 — Factor Modeling (Fama-French 5-factor)
-- [ ] Phase 10 — REST API (FastAPI)
+- [x] Phase 7 — Deep Learning (LSTM, Transformer forecasting + MC-Dropout CI)
+- [x] Phase 8 — Backtesting Framework (SMA Crossover, RSI Mean Reversion, parameter sweep)
+- [x] Phase 9 — Factor Modeling (Fama-French 5-factor + rolling exposures)
+- [x] Phase 10 — Advanced Stochastic Processes (Heston, Merton Jump-Diffusion, CEV)
+- [x] Phase 11 — Stress Testing & Scenario Analysis (10 historical scenarios + custom shocks)
+- [x] Phase 12 — Statistical Analysis Suite (Hurst · GARCH · ADF · Ljung-Box · Jarque-Bera)
+- [x] Phase 13 — Options Strategies (10 payoff profiles + 3D P&L surface)
+- [x] Phase 14 — Statistical Arbitrage / Pairs Lab (Engle-Granger, OU, z-score signals)
+- [x] Phase 15 — Risk Attribution (Component VaR, Marginal VaR, Vol Decomposition)
+- [x] Phase 16 — UX & Paper Trading (GitHub-Dark comfort theme, Live auto-refresh, Demo Portfolio engine)
+- [x] Phase 17 — Sports Betting Analytics (EV identification, Kelly Criterion, Poisson model, arbitrage scanner, The Odds API integration)
+- [ ] Phase 18 — REST API (FastAPI + WebSocket streaming)
 
 ---
 

@@ -20,6 +20,8 @@ class DataConfig:
     finnhub_api_key: str = os.getenv("FINNHUB_API_KEY", "")
     alpha_vantage_key: str = os.getenv("ALPHA_VANTAGE_API_KEY", "")
     anthropic_api_key: str = os.getenv("ANTHROPIC_API_KEY", "")
+    odds_api_key: str = os.getenv("ODDS_API_KEY", "")
+    football_data_key: str = os.getenv("FOOTBALL_DATA_KEY", "")
 
 
 @dataclass(frozen=True)

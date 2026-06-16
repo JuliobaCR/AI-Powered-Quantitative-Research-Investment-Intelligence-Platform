@@ -59,3 +59,39 @@ def black_scholes_greeks(
         "theta": round(theta, 4),
         "rho": round(rho, 4),
     }
+
+
+def greeks_surface(
+    spot: float,
+    sigma: float,
+    r: float = 0.0525,
+    option_type: str = "call",
+    strike_pct_range: tuple[float, float] = (0.70, 1.30),
+    n_strikes: int = 25,
+    expirations_days: tuple[int, ...] = (7, 14, 30, 60, 90, 120, 180, 270, 360),
+) -> dict[str, np.ndarray]:
+    """
+    Build Strike x Expiry grids of Black-Scholes Greeks for 3D visualization.
+
+    Returns a dict with 1D arrays "strikes" and "expirations" (days), plus
+    2D arrays (shape = [len(expirations), len(strikes)]) for "price",
+    "delta", "gamma", "vega", "theta", and "rho".
+    """
+    strikes = np.linspace(spot * strike_pct_range[0], spot * strike_pct_range[1], n_strikes)
+    expirations = np.array(expirations_days, dtype=float)
+
+    grids = {g: np.zeros((len(expirations), len(strikes))) for g in
+             ["price", "delta", "gamma", "vega", "theta", "rho"]}
+
+    for i, days in enumerate(expirations):
+        T = days / 365.0
+        for j, K in enumerate(strikes):
+            result = black_scholes_greeks(spot, K, T, r, sigma, option_type)
+            for g in grids:
+                grids[g][i, j] = result[g]
+
+    return {
+        "strikes": strikes,
+        "expirations": expirations,
+        **grids,
+    }
