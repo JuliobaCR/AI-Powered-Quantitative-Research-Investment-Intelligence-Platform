@@ -127,184 +127,401 @@ st.set_page_config(
 )
 
 # ── Styles ───────────────────────────────────────────────────────────────────
-# GitHub Dark-inspired theme: comfortable for long sessions, low visual fatigue.
-# Key decisions: #0D1117 bg (no pure black), #C9D1D9 text (no pure white),
-# #30363D borders (subtle separation), #58A6FF accents (cool, not harsh).
 
 st.markdown(
     """
     <style>
-    /* ── Global ──────────────────────────────────────────────────────────── */
+    /* ── Global ─────────────────────────────────────────────────────────── */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
     #MainMenu {visibility: hidden;}
     footer {visibility: hidden;}
     html, body, [data-testid="stApp"] {
-        background-color: #0D1117;
-        color: #C9D1D9;
-        font-size: 15px;
+        background-color: #F1F5F9;
+        color: #0F172A;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        font-size: 14px;
         line-height: 1.6;
     }
 
-    /* ── Main content area ───────────────────────────────────────────────── */
+    /* ── Main content area ──────────────────────────────────────────────── */
     .block-container {
         padding-top: 1.5rem;
         max-width: 1440px;
+        animation: pageFadeIn 0.28s ease-out both;
     }
 
-    /* ── Sidebar ─────────────────────────────────────────────────────────── */
+    /* ── Sidebar ────────────────────────────────────────────────────────── */
     [data-testid="stSidebar"] {
-        background-color: #161B22;
-        border-right: 1px solid #30363D;
+        background: #0F172A !important;
+        border-right: 1px solid #1E293B;
+    }
+    [data-testid="stSidebar"] > div:first-child {
+        padding-top: 1.2rem;
     }
     [data-testid="stSidebar"] p,
-    [data-testid="stSidebar"] span,
+    [data-testid="stSidebar"] span {
+        color: #CBD5E1 !important;
+    }
     [data-testid="stSidebar"] label {
-        color: #C9D1D9;
+        color: #94A3B8 !important;
+        font-size: 0.68rem !important;
+        font-weight: 700 !important;
+        letter-spacing: 0.1em !important;
+        text-transform: uppercase !important;
     }
     [data-testid="stSidebar"] .stCaption,
     [data-testid="stSidebar"] [data-testid="stCaptionContainer"] {
-        color: #7D8590;
-        font-size: 0.7rem;
-        letter-spacing: 0.06em;
-        text-transform: uppercase;
-        padding-top: 0.6rem;
+        color: #475569 !important;
+        font-size: 0.68rem;
+        letter-spacing: 0.04em;
     }
     [data-testid="stSidebar"] hr {
-        border-color: #30363D;
-        margin: 0.5rem 0;
+        border-color: #1E293B !important;
+        margin: 0.6rem 0;
+    }
+    [data-testid="stSidebar"] .stRadio label {
+        color: #CBD5E1 !important;
+        font-size: 0.85rem !important;
+        font-weight: 500 !important;
+        letter-spacing: 0 !important;
+        text-transform: none !important;
+        padding: 5px 8px !important;
+        border-radius: 7px !important;
+        transition: background 0.15s, color 0.15s !important;
+    }
+    [data-testid="stSidebar"] .stRadio label:hover {
+        background: rgba(255,255,255,0.06) !important;
+        color: #F1F5F9 !important;
+    }
+    [data-testid="stSidebar"] input[type="text"],
+    [data-testid="stSidebar"] input[type="number"] {
+        background: #1E293B !important;
+        border-color: #334155 !important;
+        color: #E2E8F0 !important;
+    }
+    [data-testid="stSidebar"] [data-testid="stSelectbox"] > div > div {
+        background: #1E293B !important;
+        border-color: #334155 !important;
+        color: #E2E8F0 !important;
     }
 
-    /* ── Headings ────────────────────────────────────────────────────────── */
-    h1 { font-size: 1.55rem; color: #E6EDF3; letter-spacing: -0.02em; font-weight: 700; }
-    h2 { font-size: 1.2rem;  color: #C9D1D9; letter-spacing: -0.01em; font-weight: 600; }
-    h3 { font-size: 1.0rem;  color: #C9D1D9; letter-spacing: -0.01em; font-weight: 600; }
+    /* ── Headings ───────────────────────────────────────────────────────── */
+    h1 { font-size: 1.55rem; color: #0F172A; letter-spacing: -0.02em; font-weight: 700; }
+    h2 { font-size: 1.15rem; color: #1E293B; letter-spacing: -0.01em; font-weight: 600; }
+    h3 { font-size: 0.98rem; color: #334155; letter-spacing: 0;        font-weight: 600; }
 
-    /* ── Metrics ─────────────────────────────────────────────────────────── */
+    /* ── Metrics ────────────────────────────────────────────────────────── */
+    [data-testid="metric-container"] {
+        background: #FFFFFF;
+        border: 1px solid #E2E8F0;
+        border-radius: 12px;
+        padding: 14px 18px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+        animation: fadeInUp 0.35s ease-out both;
+    }
     .stMetric label,
     .stMetric [data-testid="stMetricLabel"] {
-        font-size: 0.72rem;
-        color: #7D8590;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
+        font-size: 0.7rem !important;
+        color: #64748B !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.06em !important;
+        font-weight: 600 !important;
     }
     .stMetric [data-testid="stMetricValue"] {
-        font-size: 1.4rem;
-        font-weight: 700;
-        color: #E6EDF3;
+        font-size: 1.45rem !important;
+        font-weight: 700 !important;
+        color: #0F172A !important;
     }
     .stMetric [data-testid="stMetricDelta"] {
-        font-size: 0.78rem;
+        font-size: 0.78rem !important;
+        font-weight: 600 !important;
     }
 
-    /* ── Tabs ────────────────────────────────────────────────────────────── */
+    /* ── Tabs ───────────────────────────────────────────────────────────── */
     [data-testid="stTabs"] > div > div > div > div button {
-        color: #7D8590;
+        color: #64748B;
         font-size: 0.85rem;
+        font-weight: 500;
         padding: 0.5rem 1rem;
         border-radius: 0;
         border-bottom: 2px solid transparent;
+        background: transparent;
+        transition: color 0.15s;
     }
     [data-testid="stTabs"] > div > div > div > div button[aria-selected="true"] {
-        color: #58A6FF;
-        border-bottom-color: #58A6FF;
-        background: transparent;
+        color: #6366F1;
+        border-bottom-color: #6366F1;
+        font-weight: 600;
     }
     [data-testid="stTabs"] > div > div > div > div button:hover {
-        color: #C9D1D9;
+        color: #6366F1;
     }
 
-    /* ── Buttons ─────────────────────────────────────────────────────────── */
+    /* ── Buttons ────────────────────────────────────────────────────────── */
     .stButton > button {
-        background: #21262D;
-        border: 1px solid #30363D;
-        color: #C9D1D9;
-        border-radius: 6px;
+        background: #FFFFFF;
+        border: 1.5px solid #E2E8F0;
+        color: #374151;
+        border-radius: 8px;
         font-size: 0.85rem;
+        font-weight: 500;
         padding: 0.4rem 1rem;
-        transition: background 0.12s, border-color 0.12s;
+        transition: background 0.15s, border-color 0.15s, transform 0.12s, box-shadow 0.15s;
     }
     .stButton > button:hover {
-        background: #30363D;
-        border-color: #58A6FF;
-        color: #E6EDF3;
+        background: #F8FAFC;
+        border-color: #6366F1;
+        color: #6366F1;
+        transform: translateY(-1px);
+        box-shadow: 0 3px 10px rgba(99,102,241,0.15);
     }
     .stButton > button[kind="primary"] {
-        background: #1D9E75;
-        border-color: #1D9E75;
+        background: #6366F1;
+        border-color: #6366F1;
         color: #fff;
+        font-weight: 600;
     }
     .stButton > button[kind="primary"]:hover {
-        background: #18855E;
-        border-color: #18855E;
+        background: #4F46E5;
+        border-color: #4F46E5;
+        box-shadow: 0 4px 14px rgba(99,102,241,0.35);
+        transform: translateY(-1px);
     }
 
-    /* ── Form inputs ─────────────────────────────────────────────────────── */
+    /* ── Form inputs ────────────────────────────────────────────────────── */
     [data-testid="stTextInput"] input,
     [data-testid="stNumberInput"] input {
-        background-color: #161B22;
-        border: 1px solid #30363D;
-        color: #C9D1D9;
-        border-radius: 6px;
-        font-size: 0.9rem;
+        background-color: #FFFFFF;
+        border: 1.5px solid #E2E8F0;
+        color: #0F172A;
+        border-radius: 8px;
+        font-size: 0.875rem;
+        transition: border-color 0.2s, box-shadow 0.2s;
     }
     [data-testid="stTextInput"] input:focus,
     [data-testid="stNumberInput"] input:focus {
-        border-color: #58A6FF;
-        box-shadow: 0 0 0 2px rgba(88,166,255,0.15);
+        border-color: #6366F1;
+        box-shadow: 0 0 0 3px rgba(99,102,241,0.1);
+        outline: none;
     }
 
-    /* ── Selectbox ───────────────────────────────────────────────────────── */
+    /* ── Selectbox ──────────────────────────────────────────────────────── */
     [data-testid="stSelectbox"] > div > div {
-        background-color: #161B22;
-        border: 1px solid #30363D;
-        color: #C9D1D9;
-        border-radius: 6px;
+        background-color: #FFFFFF;
+        border: 1.5px solid #E2E8F0;
+        color: #0F172A;
+        border-radius: 8px;
     }
 
-    /* ── Sliders ─────────────────────────────────────────────────────────── */
+    /* ── Sliders ────────────────────────────────────────────────────────── */
     [data-testid="stSlider"] p {
-        color: #7D8590;
+        color: #64748B;
         font-size: 0.8rem;
     }
 
-    /* ── Dividers ────────────────────────────────────────────────────────── */
+    /* ── Dividers ───────────────────────────────────────────────────────── */
     hr {
         border: none;
-        border-top: 1px solid #30363D;
+        border-top: 1px solid #E2E8F0;
         margin: 0.75rem 0;
     }
 
-    /* ── Alert / banner boxes ────────────────────────────────────────────── */
-    [data-testid="stSuccess"]  { background: rgba(29,158,117,0.10); border-left: 3px solid #1D9E75; }
-    [data-testid="stWarning"]  { background: rgba(186,117,23,0.10); border-left: 3px solid #BA7517; }
-    [data-testid="stInfo"]     { background: rgba(83,74,183,0.10);  border-left: 3px solid #534AB7; }
-    [data-testid="stError"]    { background: rgba(216,90,48,0.10);  border-left: 3px solid #D85A30; }
+    /* ── Alert / banner boxes ───────────────────────────────────────────── */
+    [data-testid="stSuccess"]  { background: rgba(16,185,129,0.08); border-left: 3px solid #10B981; border-radius: 8px; }
+    [data-testid="stWarning"]  { background: rgba(245,158,11,0.08); border-left: 3px solid #F59E0B; border-radius: 8px; }
+    [data-testid="stInfo"]     { background: rgba(99,102,241,0.08); border-left: 3px solid #6366F1; border-radius: 8px; }
+    [data-testid="stError"]    { background: rgba(239,68,68,0.08);  border-left: 3px solid #EF4444; border-radius: 8px; }
 
-    /* ── Dataframe table ─────────────────────────────────────────────────── */
+    /* ── Dataframe table ────────────────────────────────────────────────── */
     [data-testid="stDataFrame"] {
-        border: 1px solid #21262D;
-        border-radius: 6px;
+        border: 1px solid #E2E8F0;
+        border-radius: 10px;
         overflow: hidden;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.04);
     }
 
-    /* ── Caption / small text ────────────────────────────────────────────── */
+    /* ── Expanders ──────────────────────────────────────────────────────── */
+    details summary {
+        color: #374151 !important;
+        font-weight: 600;
+    }
+
+    /* ── Caption / small text ───────────────────────────────────────────── */
     .stCaption, [data-testid="stCaptionContainer"] {
-        color: #7D8590;
+        color: #64748B;
         font-size: 0.78rem;
         line-height: 1.5;
     }
 
-    /* ── Scrollbars ──────────────────────────────────────────────────────── */
-    ::-webkit-scrollbar { width: 7px; height: 7px; }
-    ::-webkit-scrollbar-track { background: #0D1117; }
-    ::-webkit-scrollbar-thumb { background: #30363D; border-radius: 4px; }
-    ::-webkit-scrollbar-thumb:hover { background: #484F58; }
+    /* ── Scrollbars ─────────────────────────────────────────────────────── */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #F1F5F9; }
+    ::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: #94A3B8; }
 
-    /* ── Spinner ─────────────────────────────────────────────────────────── */
-    [data-testid="stSpinner"] { color: #58A6FF; }
+    /* ── Spinner ────────────────────────────────────────────────────────── */
+    [data-testid="stSpinner"] { color: #6366F1; }
+
+    /* ── Animations ─────────────────────────────────────────────────────── */
+    @keyframes pageFadeIn {
+        from { opacity: 0; }
+        to   { opacity: 1; }
+    }
+    @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(10px); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes slideInLeft {
+        from { opacity: 0; transform: translateX(-8px); }
+        to   { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes pulse {
+        0%, 100% { opacity: 1; }
+        50%       { opacity: 0.45; }
+    }
+
+    /* ── Page header components ─────────────────────────────────────────── */
+    .page-description {
+        color: #64748B;
+        font-size: 0.9rem;
+        margin-top: -0.2rem;
+        margin-bottom: 1.1rem;
+        line-height: 1.65;
+        animation: slideInLeft 0.32s ease-out both;
+    }
+    .insight-box {
+        background: linear-gradient(135deg, #EEF2FF 0%, #F0FDF4 100%);
+        border: 1px solid #C7D2FE;
+        border-left: 4px solid #6366F1;
+        border-radius: 10px;
+        padding: 11px 15px;
+        margin: 8px 0 14px 0;
+        font-size: 0.855rem;
+        color: #1E293B;
+        line-height: 1.65;
+        animation: fadeInUp 0.38s ease-out both;
+    }
+    .insight-box strong { color: #4F46E5; }
+
+    /* ── Status badges ──────────────────────────────────────────────────── */
+    .live-badge {
+        display: inline-flex; align-items: center; gap: 5px;
+        font-size: 0.7rem; font-weight: 700; letter-spacing: 0.08em;
+        color: #10B981; text-transform: uppercase;
+    }
+    .live-dot {
+        width: 7px; height: 7px; background: #10B981;
+        border-radius: 50%; display: inline-block;
+        animation: pulse 1.5s ease-in-out infinite;
+    }
+    .closed-badge {
+        display: inline-flex; align-items: center; gap: 5px;
+        font-size: 0.7rem; font-weight: 600; color: #94A3B8; text-transform: uppercase;
+    }
+
+    /* ── Stat / info card ───────────────────────────────────────────────── */
+    .stat-card {
+        background: #FFFFFF;
+        border: 1px solid #E2E8F0;
+        border-radius: 12px;
+        padding: 14px 16px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+        animation: fadeInUp 0.4s ease-out both;
+    }
+    .section-chip {
+        display: inline-block;
+        font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em;
+        text-transform: uppercase; color: #6366F1;
+        background: #EEF2FF; border-radius: 5px;
+        padding: 2px 8px; margin-bottom: 6px;
+    }
     </style>
     """,
     unsafe_allow_html=True,
 )
+
+# ── UI helpers ───────────────────────────────────────────────────────────────
+
+def _page_header(title: str, description: str) -> None:
+    """Render a consistent page title with a descriptive subtitle."""
+    st.title(title)
+    st.markdown(f'<p class="page-description">{description}</p>', unsafe_allow_html=True)
+
+
+def _insight_box(text: str) -> None:
+    """Render a styled data-driven insight panel below a chart."""
+    st.markdown(f'<div class="insight-box">💡 {text}</div>', unsafe_allow_html=True)
+
+
+def _gen_watchlist_insights(quotes: dict, ticker_list: list[str]) -> str:
+    """Generate a one-line market summary for the Overview page."""
+    changes = [(t, quotes[t].get("change_pct", 0.0)) for t in ticker_list if t in quotes]
+    if not changes:
+        return ""
+    best_t, best_pct = max(changes, key=lambda x: x[1])
+    worst_t, worst_pct = min(changes, key=lambda x: x[1])
+    gainers = sum(1 for _, p in changes if p > 0)
+    parts: list[str] = []
+    if best_pct > 0:
+        parts.append(f"<strong>{best_t}</strong> lidera hoy con <strong>+{best_pct:.2f}%</strong>")
+    if worst_pct < 0:
+        parts.append(f"<strong>{worst_t}</strong> es el mayor rezagado con <strong>{worst_pct:.2f}%</strong>")
+    parts.append(f"{gainers} de {len(changes)} activos en positivo")
+    return " · ".join(parts)
+
+
+def _gen_performance_insights(data: dict, ticker_list: list[str]) -> str:
+    """Generate insight text for the indexed price-performance chart."""
+    if not data:
+        return ""
+    final_vals = {}
+    for t, df in data.items():
+        if not df.empty and len(df) > 1:
+            final_vals[t] = (df["Close"].iloc[-1] / df["Close"].iloc[0] - 1) * 100
+    if not final_vals:
+        return ""
+    best_t = max(final_vals, key=final_vals.get)
+    worst_t = min(final_vals, key=final_vals.get)
+    parts = [
+        f"En el periodo seleccionado, <strong>{best_t}</strong> es el activo más rentable "
+        f"(<strong>+{final_vals[best_t]:.1f}%</strong>)."
+    ]
+    if final_vals[worst_t] < 0:
+        parts.append(
+            f"<strong>{worst_t}</strong> ha caído <strong>{final_vals[worst_t]:.1f}%</strong> desde el inicio del periodo."
+        )
+    else:
+        parts.append(
+            f"<strong>{worst_t}</strong> obtuvo el menor rendimiento con <strong>+{final_vals[worst_t]:.1f}%</strong>."
+        )
+    return " ".join(parts)
+
+
+def _gen_portfolio_insights(snap: dict) -> str:
+    """Generate a data-driven summary for the Demo Portfolio dashboard."""
+    positions = snap.get("positions", [])
+    if not positions:
+        return "No hay posiciones abiertas. Ve a la pestaña <strong>Trade</strong> para crear tu primera orden."
+    sorted_pos = sorted(positions, key=lambda p: p.get("unrealized_pnl_pct", 0), reverse=True)
+    best = sorted_pos[0]
+    worst = sorted_pos[-1]
+    total_ret = snap.get("total_return_pct", 0.0)
+    total_pnl = snap.get("total_return", 0.0)
+    direction = "arriba" if total_pnl >= 0 else "abajo"
+    sign = "+" if total_pnl >= 0 else ""
+    parts = [
+        f"Portafolio va <strong>{direction} {sign}{total_pnl:,.0f} USD ({sign}{total_ret:.2f}%)</strong> "
+        f"respecto al capital inicial.",
+        f"Mejor posición: <strong>{best['ticker']}</strong> con "
+        f"<strong>{'+' if best['unrealized_pnl_pct'] >= 0 else ''}{best['unrealized_pnl_pct']:.1f}%</strong>.",
+    ]
+    if worst["unrealized_pnl_pct"] < 0:
+        parts.append(
+            f"Mayor lastre: <strong>{worst['ticker']}</strong> con "
+            f"<strong>{worst['unrealized_pnl_pct']:.1f}%</strong>."
+        )
+    return " ".join(parts)
+
 
 # ── Market helpers ─────────────────────────────────────────────────────────
 
@@ -324,45 +541,46 @@ def _is_market_open() -> bool:
 
 with st.sidebar:
     # ── Branding ──────────────────────────────────────────────────────────────
-    st.markdown("## ⚡ AlphaForge")
-    st.caption("AI-Powered Quant Research Platform")
-
-    # Market open / closed badge
-    if _is_market_open():
-        st.markdown(
-            '<span style="color:#1D9E75; font-size:0.72rem; font-weight:600;">'
-            '● MARKET OPEN</span>',
-            unsafe_allow_html=True,
-        )
-    else:
-        st.markdown(
-            '<span style="color:#7D8590; font-size:0.72rem;">'
-            '○ MARKET CLOSED</span>',
-            unsafe_allow_html=True,
-        )
-
-    # Last updated timestamp
     _now_str = datetime.datetime.now().strftime("%H:%M:%S")
+    _mkt_open = _is_market_open()
+    _mkt_html = (
+        '<span class="live-badge"><span class="live-dot"></span>MARKET OPEN</span>'
+        if _mkt_open else
+        '<span class="closed-badge">○ MARKET CLOSED</span>'
+    )
     st.markdown(
-        f'<span style="color:#484F58; font-size:0.68rem;">Updated {_now_str}</span>',
+        f"""
+        <div style="padding:0 4px 10px 4px;">
+          <div style="font-size:1.25rem;font-weight:800;color:#F8FAFC;letter-spacing:-0.02em;">
+            ⚡ AlphaForge
+          </div>
+          <div style="font-size:0.72rem;color:#64748B;margin-top:1px;">
+            AI-Powered Quant Platform
+          </div>
+          <div style="margin-top:7px;display:flex;align-items:center;gap:10px;">
+            {_mkt_html}
+            <span style="color:#334155;font-size:0.65rem;">{_now_str}</span>
+          </div>
+        </div>
+        """,
         unsafe_allow_html=True,
     )
 
     st.divider()
 
     # ── Navigation ────────────────────────────────────────────────────────────
-    st.caption("MARKET")
+    st.markdown('<div class="section-chip" style="color:#6366F1;background:#1E3A5F;border-radius:4px;padding:2px 8px;font-size:0.62rem;font-weight:700;letter-spacing:0.1em;">MERCADO</div>', unsafe_allow_html=True)
     page = st.radio(
         "Navigation",
         [
             "📊 Overview", "🔬 Research", "📈 Charts 3D",
-            "── MODELS ──",
+            "── MODELOS ──",
             "🔮 AI Forecast", "🧪 Backtesting", "📐 Factor Lab",
-            "── RISK & QUANT ──",
+            "── RIESGO & QUANT ──",
             "🔥 Stress Test", "📊 Quant Lab", "🔄 Pairs Lab",
-            "── PORTFOLIO ──",
+            "── PORTAFOLIO ──",
             "💼 Portfolio", "📈 Demo Portfolio", "⚡ Alpha Score",
-            "── SPORTS ──",
+            "── DEPORTES ──",
             "⚽ Sports Betting",
         ],
         label_visibility="collapsed",
@@ -371,23 +589,24 @@ with st.sidebar:
     st.divider()
 
     # ── Watchlist & period ────────────────────────────────────────────────────
+    st.markdown('<div style="font-size:0.65rem;font-weight:700;letter-spacing:0.1em;color:#475569;text-transform:uppercase;margin-bottom:4px;">Configuración</div>', unsafe_allow_html=True)
     default_tickers = PORTFOLIO_CFG.default_tickers
     tickers_input = st.text_input(
-        "Watchlist (comma-separated)",
+        "Watchlist (separado por comas)",
         value=", ".join(default_tickers),
     )
     tickers = [t.strip().upper() for t in tickers_input.split(",") if t.strip()]
 
-    selected = st.selectbox("Primary ticker", tickers)
-    period = st.selectbox("Period", ["6mo", "1y", "2y", "5y"], index=1)
+    selected = st.selectbox("Ticker principal", tickers)
+    period = st.selectbox("Periodo", ["6mo", "1y", "2y", "5y"], index=1)
 
     st.divider()
 
     # ── Live mode auto-refresh ────────────────────────────────────────────────
-    live_mode = st.checkbox("🔴 Live mode (auto-refresh)", value=False)
+    live_mode = st.checkbox("🔴 Modo Live (auto-refresh)", value=False)
     if live_mode:
         refresh_secs = st.select_slider(
-            "Refresh every", options=[30, 60, 120, 300], value=60,
+            "Refrescar cada", options=[30, 60, 120, 300], value=60,
             format_func=lambda s: f"{s}s",
         )
         components.html(
@@ -403,10 +622,10 @@ with st.sidebar:
             """,
             height=0,
         )
-        st.caption(f"Page reloads every {refresh_secs}s")
+        st.caption(f"Recarga cada {refresh_secs}s")
 
     st.divider()
-    st.caption("v0.1.0 · Julio Ricardo Barrios Amador")
+    st.markdown('<span style="color:#1E293B;font-size:0.65rem;">v0.1.0 · Julio Ricardo Barrios A.</span>', unsafe_allow_html=True)
 
 
 # ── Cached data loaders ──────────────────────────────────────────────────────
@@ -679,7 +898,11 @@ def _ticker_selector(page_key: str) -> str:
 # ── Pages ────────────────────────────────────────────────────────────────────
 
 def page_overview():
-    st.title("Market Overview")
+    _page_header(
+        "Market Overview",
+        "Snapshot en tiempo real de tu watchlist: precios actuales, variación diaria y "
+        "rendimiento acumulado normalizado para comparar activos en una misma escala.",
+    )
 
     # Top metrics — use cached quotes (TTL=30s) to avoid redundant API calls
     quotes = {t: load_quote(t) for t in tickers}
@@ -693,11 +916,16 @@ def page_overview():
                 delta=f"{q['change_pct']:+.2f}%",
             )
 
+    # Market summary insight
+    summary = _gen_watchlist_insights(quotes, tickers)
+    if summary:
+        _insight_box(summary)
+
     st.divider()
     col1, col2 = st.columns([2, 1])
 
     with col1:
-        st.subheader("Price Performance")
+        st.subheader("Rendimiento de Precio (Indexado)")
         data = load_multi(tuple(tickers), period)
         fig = go.Figure()
         for t, df in data.items():
@@ -709,13 +937,21 @@ def page_overview():
                 line=dict(width=2),
             ))
         fig.update_layout(
-            template="plotly_dark",
-            yaxis_title="Indexed (Base = 100)",
+            template="plotly_white",
+            paper_bgcolor="white",
+            plot_bgcolor="#FAFBFC",
+            yaxis_title="Base 100",
             legend=dict(orientation="h", y=-0.15),
             margin=dict(l=0, r=0, t=10, b=0),
             height=380,
         )
+        fig.update_xaxes(gridcolor="#E2E8F0", linecolor="#E2E8F0")
+        fig.update_yaxes(gridcolor="#E2E8F0", linecolor="#E2E8F0")
         st.plotly_chart(fig, use_container_width=True)
+        # Performance insight
+        perf_insight = _gen_performance_insights(data, tickers)
+        if perf_insight:
+            _insight_box(perf_insight)
 
     with col2:
         st.subheader("Watchlist")
@@ -728,19 +964,29 @@ def page_overview():
             )
         st.divider()
         # Market regime for primary ticker
-        st.subheader("Market Regime")
-        with st.spinner("Detecting regimes..."):
+        st.subheader("Régimen de Mercado")
+        with st.spinner("Detectando régimen..."):
             regime_df = load_regimes(selected, period)
         if not regime_df.empty:
             current = regime_df.iloc[-1]
             st.markdown(f"**{current['Regime_Label']}**")
             st.progress(float(current["Confidence"]))
-            st.caption(f"Confidence: {current['Confidence']:.1%}")
+            st.caption(f"Confianza: {current['Confidence']:.1%}")
+            _insight_box(
+                f"El mercado de <strong>{selected}</strong> se encuentra en régimen "
+                f"<strong>{current['Regime_Label']}</strong> con "
+                f"<strong>{current['Confidence']:.0%}</strong> de confianza."
+            )
 
 
 def page_research():
     _tc, _tsel = st.columns([3, 2])
-    _tc.title("Research")
+    with _tc:
+        _page_header(
+            "Research",
+            "Análisis fundamental profundo: ratios financieros, márgenes, valoración DCF y "
+            "análisis técnico (candlestick, RSI, MACD, Bollinger Bands).",
+        )
     with _tsel:
         page_ticker = _ticker_selector("research")
 
@@ -775,12 +1021,22 @@ def page_research():
                               for v in metrics.values()],
             ))
             fig.update_layout(
-                template="plotly_dark", height=300,
+                template="plotly_white", height=300,
+                paper_bgcolor="white", plot_bgcolor="#FAFBFC",
                 margin=dict(l=0, r=0, t=10, b=0),
                 xaxis_title="Value (%)",
             )
+            fig.update_xaxes(gridcolor="#E2E8F0")
             st.plotly_chart(fig, use_container_width=True)
 
+            best_metric = max(metrics, key=metrics.get)
+            worst_metric = min(metrics, key=metrics.get)
+            _insight_box(
+                f"<strong>{page_ticker}</strong> destaca en <strong>{best_metric}</strong> "
+                f"({metrics[best_metric]:.1f}%) y tiene margen de mejora en "
+                f"<strong>{worst_metric}</strong> ({metrics[worst_metric]:.1f}%). "
+                f"Puntaje fundamental: <strong>{fund.fundamental_score:.0f}/100</strong>."
+            )
             st.metric("Fundamental Score", f"{fund.fundamental_score:.0f} / 100")
         else:
             st.warning("No fundamental data available. Check ticker or API.")
@@ -808,12 +1064,18 @@ def page_research():
                     colorbar=dict(title="Fair Value"),
                 ))
                 fig.update_layout(
-                    template="plotly_dark", height=320,
+                    template="plotly_white", height=320,
                     margin=dict(l=0, r=0, t=10, b=0),
                 )
                 st.plotly_chart(fig, use_container_width=True)
                 verdict_color = {"Undervalued": "🟢", "Fair": "🟡", "Overvalued": "🔴"}
                 st.markdown(f"**Verdict:** {verdict_color.get(val.verdict, '⚪')} {val.verdict}")
+                _insight_box(
+                    f"El modelo DCF estima un valor justo de "
+                    f"<strong>${val.dcf_fair_value:.2f}</strong> para <strong>{page_ticker}</strong>. "
+                    f"El margen de seguridad actual es <strong>{val.dcf_margin_of_safety:+.1f}%</strong> — "
+                    f"{'activo cotiza con descuento respecto al modelo' if val.dcf_margin_of_safety > 0 else 'activo cotiza con prima respecto al modelo'}."
+                )
 
     with tab3:
         df = load_indicators(page_ticker, period)
@@ -852,7 +1114,7 @@ def page_research():
                                      line=dict(color="#BA7517")), row=3, col=1)
 
             fig.update_layout(
-                template="plotly_dark",
+                template="plotly_white",
                 height=620, showlegend=True,
                 xaxis_rangeslider_visible=False,
                 margin=dict(l=0, r=0, t=10, b=0),
@@ -863,7 +1125,12 @@ def page_research():
 
 def page_charts_3d():
     _tc, _tsel = st.columns([3, 2])
-    _tc.title("3D Analytics")
+    with _tc:
+        _page_header(
+            "3D Analytics",
+            "Visualizaciones tridimensionales interactivas: superficie de volatilidad, "
+            "cubo de correlaciones, trayectorias de régimen y laboratorio de griegas de opciones.",
+        )
     with _tsel:
         page_ticker = _ticker_selector("charts3d")
 
@@ -901,7 +1168,7 @@ def page_charts_3d():
                 },
             )])
             fig.update_layout(
-                template="plotly_dark",
+                template="plotly_white",
                 scene=dict(
                     xaxis_title="Strike ($)",
                     yaxis_title="Days to Expiry",
@@ -959,7 +1226,7 @@ def page_charts_3d():
                 ),
             )])
             fig.update_layout(
-                template="plotly_dark",
+                template="plotly_white",
                 scene=dict(
                     xaxis_title="Volatility (%)",
                     yaxis_title="Return (%)",
@@ -1004,7 +1271,7 @@ def page_charts_3d():
                     ),
                 ))
             fig.update_layout(
-                template="plotly_dark",
+                template="plotly_white",
                 scene=dict(
                     xaxis_title="Trading Days",
                     yaxis_title="Price ($)",
@@ -1036,7 +1303,7 @@ def page_charts_3d():
                 colorbar=dict(title="Pearson r"),
             ))
             fig.update_layout(
-                template="plotly_dark",
+                template="plotly_white",
                 height=450,
                 margin=dict(l=0, r=0, t=10, b=0),
             )
@@ -1064,7 +1331,7 @@ def page_charts_3d():
                     name=f"{t1}–{t2} rolling corr",
                 )])
                 fig2.update_layout(
-                    template="plotly_dark",
+                    template="plotly_white",
                     scene=dict(
                         xaxis_title="Trading Days",
                         yaxis_title=f"{t1} Price",
@@ -1132,7 +1399,7 @@ def page_charts_3d():
                 },
             )])
             fig.update_layout(
-                template="plotly_dark",
+                template="plotly_white",
                 title=f"{GREEK_TITLES.get(greek, greek.title())} — {option_type.title()} · Spot ${spot:.2f}",
                 scene=dict(
                     xaxis_title="Strike ($)",
@@ -1148,14 +1415,15 @@ def page_charts_3d():
 
 def page_ai_forecast():
     _tc, _tsel = st.columns([3, 2])
-    _tc.title("AI Forecast")
+    with _tc:
+        _page_header(
+            "AI Forecast",
+            "Pronóstico multi-modelo: Gradient Boosting, LSTM, Transformer (MC-Dropout), "
+            "Monte Carlo GBM, Heston Stochastic Vol y Merton Jump-Diffusion. "
+            "Salidas estadísticas — no constituyen consejo de inversión.",
+        )
     with _tsel:
         page_ticker = _ticker_selector("forecast")
-    st.caption(
-        "Multi-model return forecasting: Gradient Boosting, LSTM/Transformer (MC-Dropout CI), "
-        "GBM, Heston Stochastic Vol, and Merton Jump-Diffusion Monte Carlo. "
-        "Statistical outputs only — not investment advice."
-    )
 
     df = load_ohlcv(page_ticker, period)
     if df.empty:
@@ -1212,6 +1480,25 @@ def page_ai_forecast():
             st.info(f"Enable the checkbox above to train {model_type.upper()}.")
     st.caption(f"Forecast horizon: {horizon_days} trading days")
 
+    # Forecast insight
+    _gbm_exp = gbm_fc.get("expected_return_pct", 0)
+    _gbm_lo  = gbm_fc.get("ci_low_pct", 0)
+    _gbm_hi  = gbm_fc.get("ci_high_pct", 0)
+    _direction = "alcista" if _gbm_exp > 0 else "bajista"
+    _insight_fc = (
+        f"El modelo GBM proyecta un retorno de <strong>{_gbm_exp:+.2f}%</strong> "
+        f"para <strong>{page_ticker}</strong> en <strong>{horizon_days} días</strong> "
+        f"(IC 95%: {_gbm_lo:+.2f}% — {_gbm_hi:+.2f}%). Sesgo <strong>{_direction}</strong>."
+    )
+    if deep_fc:
+        _deep_exp = deep_fc.get("expected_return_pct", 0)
+        _consensus = "coinciden" if (_deep_exp > 0) == (_gbm_exp > 0) else "divergen"
+        _insight_fc += (
+            f" El modelo {model_type.upper()} proyecta <strong>{_deep_exp:+.2f}%</strong> — "
+            f"ambos modelos <strong>{_consensus}</strong> en dirección."
+        )
+    _insight_box(_insight_fc)
+
     st.divider()
     st.subheader("Monte Carlo Price Cone (GBM)")
     paths = load_gbm_paths(page_ticker, period, horizon_days, n_paths)
@@ -1225,7 +1512,7 @@ def page_ai_forecast():
 
     fig = go.Figure()
     fig.add_trace(go.Scatter(
-        x=hist.index, y=hist.values, name="Historical", line=dict(color="#E5E5E5", width=1.5),
+        x=hist.index, y=hist.values, name="Historical", line=dict(color="#94A3B8", width=1.5),
     ))
     fig.add_trace(go.Scatter(
         x=x_fan, y=fan["p95"], line=dict(width=0), showlegend=False, hoverinfo="skip",
@@ -1245,18 +1532,29 @@ def page_ai_forecast():
         x=x_fan, y=fan["p50"], name="Median path", line=dict(color="#534AB7", width=2),
     ))
     fig.update_layout(
-        template="plotly_dark",
+        template="plotly_white",
         yaxis_title="Price ($)",
         height=420,
         legend=dict(orientation="h", y=-0.15),
         margin=dict(l=0, r=0, t=10, b=0),
     )
     st.plotly_chart(fig, use_container_width=True)
+    # Fan chart insight
+    last_price = float(df["Close"].iloc[-1])
+    median_end = float(fan["p50"].iloc[-1])
+    p5_end = float(fan["p5"].iloc[-1])
+    p95_end = float(fan["p95"].iloc[-1])
+    _insight_box(
+        f"El cono de Monte Carlo proyecta la mediana de <strong>{page_ticker}</strong> "
+        f"en <strong>${median_end:.2f}</strong> en {horizon_days} días "
+        f"(desde ${last_price:.2f} hoy). "
+        f"Rango del 90% de los escenarios: <strong>${p5_end:.2f} — ${p95_end:.2f}</strong>."
+    )
 
     st.subheader("Forecast Fan (3D) — GBM")
     st.caption(
-        f"{n_paths} simulated GBM price paths over {horizon_days} trading days — "
-        "drag to rotate, scroll to zoom."
+        f"{n_paths} trayectorias GBM simuladas durante {horizon_days} días — "
+        "arrastra para rotar, scroll para zoom."
     )
     days = np.arange(paths.shape[1])
     path_idx = np.arange(paths.shape[0])
@@ -1269,7 +1567,7 @@ def page_ai_forecast():
         },
     )])
     fig3d.update_layout(
-        template="plotly_dark",
+        template="plotly_white",
         scene=dict(
             xaxis_title="Days Ahead",
             yaxis_title="Simulation Path",
@@ -1321,7 +1619,7 @@ def page_ai_forecast():
 
             fig_h = go.Figure()
             fig_h.add_trace(go.Scatter(x=hist_close.index, y=hist_close.values,
-                                       name="Historical", line=dict(color="#E5E5E5", width=1.5)))
+                                       name="Historical", line=dict(color="#94A3B8", width=1.5)))
             fig_h.add_trace(go.Scatter(x=x_fan, y=h_fan["p95"], line=dict(width=0),
                                        showlegend=False, hoverinfo="skip"))
             fig_h.add_trace(go.Scatter(x=x_fan, y=h_fan["p5"], line=dict(width=0),
@@ -1334,7 +1632,7 @@ def page_ai_forecast():
                                        name="25–75% range"))
             fig_h.add_trace(go.Scatter(x=x_fan, y=h_fan["p50"], name="Median (Heston)",
                                        line=dict(color="#1D9E75", width=2)))
-            fig_h.update_layout(template="plotly_dark", yaxis_title="Price ($)",
+            fig_h.update_layout(template="plotly_white", yaxis_title="Price ($)",
                                  height=380, legend=dict(orientation="h", y=-0.15),
                                  margin=dict(l=0, r=0, t=10, b=0))
             st.plotly_chart(fig_h, use_container_width=True)
@@ -1349,7 +1647,7 @@ def page_ai_forecast():
                 contours={"z": {"show": True, "usecolormap": True, "project_z": True}},
             )])
             fig_h3d.update_layout(
-                template="plotly_dark",
+                template="plotly_white",
                 scene=dict(xaxis_title="Days", yaxis_title="Path",
                            zaxis_title="Price ($)",
                            camera=dict(eye=dict(x=1.8, y=-1.8, z=1.2))),
@@ -1375,7 +1673,7 @@ def page_ai_forecast():
 
             fig_jd = go.Figure()
             fig_jd.add_trace(go.Scatter(x=hist_close.index, y=hist_close.values,
-                                        name="Historical", line=dict(color="#E5E5E5", width=1.5)))
+                                        name="Historical", line=dict(color="#94A3B8", width=1.5)))
             fig_jd.add_trace(go.Scatter(x=x_fan, y=jd_fan["p95"], line=dict(width=0),
                                         showlegend=False, hoverinfo="skip"))
             fig_jd.add_trace(go.Scatter(x=x_fan, y=jd_fan["p5"], line=dict(width=0),
@@ -1388,7 +1686,7 @@ def page_ai_forecast():
                                         name="25–75% range"))
             fig_jd.add_trace(go.Scatter(x=x_fan, y=jd_fan["p50"], name="Median (Jump-Diffusion)",
                                         line=dict(color="#D85A30", width=2)))
-            fig_jd.update_layout(template="plotly_dark", yaxis_title="Price ($)",
+            fig_jd.update_layout(template="plotly_white", yaxis_title="Price ($)",
                                   height=380, legend=dict(orientation="h", y=-0.15),
                                   margin=dict(l=0, r=0, t=10, b=0))
             st.plotly_chart(fig_jd, use_container_width=True)
@@ -1403,7 +1701,7 @@ def page_ai_forecast():
                 contours={"z": {"show": True, "usecolormap": True, "project_z": True}},
             )])
             fig_jd3d.update_layout(
-                template="plotly_dark",
+                template="plotly_white",
                 scene=dict(xaxis_title="Days", yaxis_title="Path",
                            zaxis_title="Price ($)",
                            camera=dict(eye=dict(x=1.8, y=-1.8, z=1.2))),
@@ -1413,7 +1711,11 @@ def page_ai_forecast():
 
 
 def page_portfolio():
-    st.title("Portfolio Analytics")
+    _page_header(
+        "Portfolio Analytics",
+        "Optimización cuantitativa de portafolio: frontera eficiente, Sharpe máximo, "
+        "paridad de riesgo y atribución de retorno por activo.",
+    )
 
     data = load_multi(tuple(tickers), period)
     returns_df = pd.DataFrame({
@@ -1457,7 +1759,7 @@ def page_portfolio():
             marker=dict(colors=["#1D9E75", "#534AB7", "#BA7517", "#D85A30"]),
         ))
         fig.update_layout(
-            template="plotly_dark", height=350,
+            template="plotly_white", height=350,
             margin=dict(l=0, r=0, t=10, b=0),
             showlegend=False,
         )
@@ -1482,7 +1784,7 @@ def page_portfolio():
                 name="Optimal Portfolio",
             ))
             fig.update_layout(
-                template="plotly_dark",
+                template="plotly_white",
                 xaxis_title="Volatility (%)",
                 yaxis_title="Expected Return (%)",
                 height=350,
@@ -1525,7 +1827,7 @@ def page_portfolio():
                     text=[f"{v:.3f}%" for v in comp_var.values()],
                     textposition="outside",
                 ))
-                fig_cv.update_layout(template="plotly_dark", height=280,
+                fig_cv.update_layout(template="plotly_white", height=280,
                                      yaxis_title="VaR %", margin=dict(l=0, r=0, t=10, b=0))
                 st.plotly_chart(fig_cv, use_container_width=True)
 
@@ -1539,7 +1841,7 @@ def page_portfolio():
                     textinfo="label+percent",
                     marker=dict(colors=["#1D9E75", "#534AB7", "#BA7517", "#D85A30", "#888"]),
                 ))
-                fig_vc.update_layout(template="plotly_dark", height=280,
+                fig_vc.update_layout(template="plotly_white", height=280,
                                      showlegend=False, margin=dict(l=0, r=0, t=10, b=0))
                 st.plotly_chart(fig_vc, use_container_width=True)
 
@@ -1552,13 +1854,17 @@ def page_portfolio():
                     text=[f"{v:+.4f}%" for v in marg_var.values()],
                     textposition="outside",
                 ))
-                fig_mv.update_layout(template="plotly_dark", height=280,
+                fig_mv.update_layout(template="plotly_white", height=280,
                                      yaxis_title="ΔVaR / Δw", margin=dict(l=0, r=0, t=10, b=0))
                 st.plotly_chart(fig_mv, use_container_width=True)
 
 
 def page_stress_test():
-    st.title("Stress Test & Scenario Analysis")
+    _page_header(
+        "Stress Test & Scenario Analysis",
+        "Aplica escenarios históricos de crisis (2008, COVID-19, dot-com, etc.) a tu portafolio "
+        "para cuantificar pérdidas potenciales bajo condiciones extremas de mercado.",
+    )
     st.caption(
         "Historical stress scenarios applied to a equal-weight portfolio of your watchlist. "
         "Inspired by Basel III stressed-VaR and industry practice for market risk management."
@@ -1615,7 +1921,7 @@ def page_stress_test():
         marker_color=["#1D9E75" if v >= 0 else "#D85A30" for v in pnl.values()],
         text=[f"{v:+.2f}%" for v in pnl.values()], textposition="outside",
     ))
-    fig_pnl.update_layout(template="plotly_dark", height=320,
+    fig_pnl.update_layout(template="plotly_white", height=320,
                            yaxis_title="P&L (%)", margin=dict(l=0, r=0, t=10, b=0))
     st.plotly_chart(fig_pnl, use_container_width=True)
 
@@ -1643,7 +1949,7 @@ def page_stress_test():
             colorbar=dict(title="P&L %"),
         ))
         fig_heat.update_layout(
-            template="plotly_dark", height=420,
+            template="plotly_white", height=420,
             margin=dict(l=0, r=0, t=10, b=0),
             xaxis_title="Asset / Portfolio",
             yaxis_title="Stress Scenario",
@@ -1668,7 +1974,7 @@ def page_stress_test():
             )])
             tick_y = list(range(len(plot_df)))
             fig_3d.update_layout(
-                template="plotly_dark",
+                template="plotly_white",
                 scene=dict(
                     xaxis=dict(title="Asset", tickvals=list(x_3d), ticktext=asset_cols),
                     yaxis=dict(title="Scenario", tickvals=tick_y,
@@ -1684,7 +1990,12 @@ def page_stress_test():
 
 def page_quant_lab():
     _tc, _tsel = st.columns([3, 2])
-    _tc.title("Quant Lab")
+    with _tc:
+        _page_header(
+            "Quant Lab",
+            "Estadística cuantitativa avanzada: exponente de Hurst, prueba ADF de raíz unitaria, "
+            "Ljung-Box, distribución de retornos, GARCH y autocorrelación rodante.",
+        )
     with _tsel:
         page_ticker = _ticker_selector("quantlab")
     st.caption(
@@ -1748,7 +2059,7 @@ def page_quant_lab():
                     ))
                     fig_acf.add_hline(y=0.1, line_dash="dot", line_color="gray")
                     fig_acf.add_hline(y=-0.1, line_dash="dot", line_color="gray")
-                    fig_acf.update_layout(template="plotly_dark", height=200,
+                    fig_acf.update_layout(template="plotly_white", height=200,
                                           xaxis_title="Lag", yaxis_title="ACF",
                                           margin=dict(l=0, r=0, t=10, b=0))
                     st.plotly_chart(fig_acf, use_container_width=True)
@@ -1777,7 +2088,7 @@ def page_quant_lab():
                                        line=dict(color="#888", width=1, dash="dot")))
             fig_g.add_trace(go.Scatter(x=garch.index, y=garch.values, name="GARCH(1,1) Vol",
                                        line=dict(color="#1D9E75", width=2)))
-            fig_g.update_layout(template="plotly_dark", yaxis_title="Annualized Vol (%)",
+            fig_g.update_layout(template="plotly_white", yaxis_title="Annualized Vol (%)",
                                  height=380, legend=dict(orientation="h", y=-0.15),
                                  margin=dict(l=0, r=0, t=10, b=0))
             st.plotly_chart(fig_g, use_container_width=True)
@@ -1803,7 +2114,7 @@ def page_quant_lab():
             fig_ac.add_hline(y=0, line_color="white", line_width=0.8)
             fig_ac.add_hline(y=0.15, line_dash="dot", line_color="#D85A30", opacity=0.6)
             fig_ac.add_hline(y=-0.15, line_dash="dot", line_color="#D85A30", opacity=0.6)
-            fig_ac.update_layout(template="plotly_dark", yaxis_title="Autocorrelation",
+            fig_ac.update_layout(template="plotly_white", yaxis_title="Autocorrelation",
                                   height=320, margin=dict(l=0, r=0, t=10, b=0))
             st.plotly_chart(fig_ac, use_container_width=True)
 
@@ -1840,7 +2151,7 @@ def page_quant_lab():
                     x=x_norm * 100, y=y_norm / 100, name="Normal Fit",
                     line=dict(color="#D85A30", width=2),
                 ))
-                fig_hist.update_layout(template="plotly_dark", height=340,
+                fig_hist.update_layout(template="plotly_white", height=340,
                                        xaxis_title="Daily Return (%)",
                                        yaxis_title="Density",
                                        margin=dict(l=0, r=0, t=10, b=0))
@@ -1856,7 +2167,7 @@ def page_quant_lab():
                 line_x = [float(qq_x.min()), float(qq_x.max())]
                 fig_qq.add_trace(go.Scatter(x=line_x, y=[v * 100 for v in line_x],
                                             line=dict(color="#D85A30", dash="dash"), name="Normal line"))
-                fig_qq.update_layout(template="plotly_dark", height=340,
+                fig_qq.update_layout(template="plotly_white", height=340,
                                      xaxis_title="Theoretical Quantiles",
                                      yaxis_title="Sample Quantiles (%)",
                                      margin=dict(l=0, r=0, t=10, b=0))
@@ -1871,7 +2182,7 @@ def page_quant_lab():
                 marker_color=["#D85A30" if v < 0 else "#1D9E75" for v in pct_vals],
                 text=[f"{v:.3f}%" for v in pct_vals], textposition="outside",
             ))
-            fig_pct.update_layout(template="plotly_dark", height=280,
+            fig_pct.update_layout(template="plotly_white", height=280,
                                    yaxis_title="Daily Return (%)",
                                    margin=dict(l=0, r=0, t=10, b=0))
             st.plotly_chart(fig_pct, use_container_width=True)
@@ -1936,7 +2247,7 @@ def page_quant_lab():
                     fig_str.add_vline(x=be, line_dash="dash", line_color="#D85A30", opacity=0.6)
 
                 fig_str.update_layout(
-                    template="plotly_dark", height=420,
+                    template="plotly_white", height=420,
                     xaxis_title="Spot Price at Expiry ($)",
                     yaxis_title="P&L per Share ($)",
                     margin=dict(l=0, r=0, t=10, b=0),
@@ -1965,7 +2276,7 @@ def page_quant_lab():
                     contours={"z": {"show": True, "usecolormap": True, "project_z": True}},
                 )])
                 fig_str3d.update_layout(
-                    template="plotly_dark",
+                    template="plotly_white",
                     scene=dict(
                         xaxis_title="Spot ($)", yaxis_title="Days to Expiry",
                         zaxis_title="P&L ($)",
@@ -1977,7 +2288,11 @@ def page_quant_lab():
 
 
 def page_pairs_lab():
-    st.title("Pairs Lab — Statistical Arbitrage")
+    _page_header(
+        "Pairs Lab — Arbitraje Estadístico",
+        "Test de cointegración Engle-Granger, estimación del half-life Ornstein-Uhlenbeck, "
+        "z-score del spread y señales de entrada/salida para estrategias long-short.",
+    )
     st.caption(
         "Engle-Granger cointegration tests, Ornstein-Uhlenbeck half-life estimation, "
         "and spread z-score signals. Classic stat-arb framework from Gatev, Goetzmann & Rouwenhorst (2006)."
@@ -2048,7 +2363,7 @@ def page_pairs_lab():
         fig_z.add_hline(y=0.5, line_dash="dot", line_color="gray", opacity=0.5)
         fig_z.add_hline(y=-0.5, line_dash="dot", line_color="gray", opacity=0.5)
         fig_z.add_hline(y=0, line_color="white", line_width=0.6)
-        fig_z.update_layout(template="plotly_dark", height=380,
+        fig_z.update_layout(template="plotly_white", height=380,
                              yaxis_title="Z-Score", margin=dict(l=0, r=0, t=10, b=0))
         st.plotly_chart(fig_z, use_container_width=True)
 
@@ -2058,7 +2373,7 @@ def page_pairs_lab():
                                     name="Spread", line=dict(color="#BA7517", width=1.5)))
         fig_sp.add_hline(y=float(pair.spread_mean), line_dash="dot", line_color="white",
                           annotation_text="Mean")
-        fig_sp.update_layout(template="plotly_dark", height=280,
+        fig_sp.update_layout(template="plotly_white", height=280,
                               yaxis_title=f"Spread ({ticker_a} − β·{ticker_b})",
                               margin=dict(l=0, r=0, t=10, b=0))
         st.plotly_chart(fig_sp, use_container_width=True)
@@ -2070,7 +2385,7 @@ def page_pairs_lab():
             normalized = p / p.iloc[0] * 100
             fig_px.add_trace(go.Scatter(x=normalized.index, y=normalized.values,
                                         name=t, line=dict(width=2)))
-        fig_px.update_layout(template="plotly_dark", height=360,
+        fig_px.update_layout(template="plotly_white", height=360,
                               yaxis_title="Indexed (Base = 100)",
                               margin=dict(l=0, r=0, t=10, b=0))
         st.plotly_chart(fig_px, use_container_width=True)
@@ -2100,7 +2415,12 @@ def page_pairs_lab():
 
 def page_backtesting():
     _tc, _tsel = st.columns([3, 2])
-    _tc.title("Backtesting")
+    with _tc:
+        _page_header(
+            "Backtesting",
+            "Prueba estrategias de cruce de medias móviles en datos históricos reales. "
+            "Métricas: Sharpe ratio, drawdown máximo, tasa de acierto y equity curve completo.",
+        )
     with _tsel:
         page_ticker = _ticker_selector("backtest")
 
@@ -2148,7 +2468,7 @@ def page_backtesting():
         name="Buy & Hold", line=dict(color="#888", width=1.5, dash="dot"),
     ))
     fig.update_layout(
-        template="plotly_dark",
+        template="plotly_white",
         yaxis_title="Growth of $100",
         height=380,
         legend=dict(orientation="h", y=-0.15),
@@ -2164,12 +2484,24 @@ def page_backtesting():
         line=dict(color="#D85A30"), name="Drawdown",
     ))
     fig_dd.update_layout(
-        template="plotly_dark",
+        template="plotly_white",
         yaxis_title="Drawdown (%)",
         height=220,
         margin=dict(l=0, r=0, t=10, b=0),
     )
     st.plotly_chart(fig_dd, use_container_width=True)
+
+    # Backtesting insight
+    _strat_ret = m.get("annual_return_pct", 0)
+    _sharpe = m.get("sharpe_ratio", 0)
+    _mdd = m.get("max_drawdown_pct", 0)
+    _bh_ret = (float(result.benchmark_curve.iloc[-1]) - 1) * 100
+    _winner = strategy if _strat_ret > _bh_ret else "Buy & Hold"
+    _insight_box(
+        f"La estrategia <strong>{result.strategy_name}</strong> genera <strong>{_strat_ret:.1f}% anual</strong> "
+        f"vs Buy & Hold <strong>{_bh_ret:.1f}%</strong> — <strong>{_winner}</strong> gana en el periodo. "
+        f"Sharpe: <strong>{_sharpe:.2f}</strong> · Max Drawdown: <strong>{_mdd:.1f}%</strong>."
+    )
 
     if strategy == "SMA Crossover":
         st.divider()
@@ -2191,7 +2523,7 @@ def page_backtesting():
                 },
             )])
             fig3.update_layout(
-                template="plotly_dark",
+                template="plotly_white",
                 scene=dict(
                     xaxis_title="Fast SMA",
                     yaxis_title="Slow SMA",
@@ -2206,7 +2538,12 @@ def page_backtesting():
 
 def page_factor_lab():
     _tc, _tsel = st.columns([3, 2])
-    _tc.title("Factor Lab")
+    with _tc:
+        _page_header(
+            "Factor Lab — Fama-French",
+            "Regresión contra los 5 factores de Fama-French (Mkt-RF, SMB, HML, RMW, CMA). "
+            "Descompone el alfa, los betas factoriales y la exposición rodante en 3D.",
+        )
     with _tsel:
         page_ticker = _ticker_selector("factorlab")
     st.caption(
@@ -2244,12 +2581,24 @@ def page_factor_lab():
         text=[f"{v:.2f}" for v in betas.values()], textposition="outside",
     ))
     fig.update_layout(
-        template="plotly_dark",
+        template="plotly_white",
         height=320,
         xaxis_title="Beta",
         margin=dict(l=0, r=0, t=10, b=0),
     )
     st.plotly_chart(fig, use_container_width=True)
+
+    # Factor insight
+    dom_factor = max(betas, key=lambda k: abs(betas[k]))
+    alpha_dir = "positivo" if exposure.alpha_annual_pct > 0 else "negativo"
+    _insight_box(
+        f"<strong>{page_ticker}</strong> muestra un alfa anualizado de "
+        f"<strong>{exposure.alpha_annual_pct:+.2f}%</strong> ({alpha_dir}) "
+        f"con R² de <strong>{exposure.r_squared:.2f}</strong>. "
+        f"El factor dominante es <strong>{dom_factor}</strong> "
+        f"(β = {betas[dom_factor]:.2f}), "
+        f"{'indicando sesgo valor' if dom_factor == 'HML' else 'indicando mayor exposición a empresas pequeñas' if dom_factor == 'SMB' else 'con alta exposición al mercado' if dom_factor == 'Mkt-RF' else 'con perfil de rentabilidad diferenciado'}."
+    )
 
     st.divider()
     st.subheader("Rolling Factor Exposure (3D)")
@@ -2276,7 +2625,7 @@ def page_factor_lab():
         },
     )])
     fig3d.update_layout(
-        template="plotly_dark",
+        template="plotly_white",
         scene=dict(
             xaxis=dict(
                 title="Date",
@@ -2295,7 +2644,12 @@ def page_factor_lab():
 
 def page_alpha():
     _tc, _tsel = st.columns([3, 2])
-    _tc.title("⚡ Alpha Score")
+    with _tc:
+        _page_header(
+            "⚡ Alpha Score",
+            "Puntuación compuesta de 0-100 que combina fundamentales, tendencia técnica, "
+            "sentimiento de noticias, valoración, actividad de opciones y perfil de riesgo.",
+        )
     with _tsel:
         page_ticker = _ticker_selector("alpha")
 
@@ -2325,6 +2679,18 @@ def page_alpha():
         f"{page_ticker} · Score: **{result.total_score:.0f} / 100** · "
         f"Confidence: {result.confidence:.0%}"
     )
+    _verdict_es = {"BUY": "compra", "WAIT": "espera", "SELL": "venta"}.get(result.verdict, result.verdict)
+    _best_comp = max(result.component_scores, key=result.component_scores.get)
+    _worst_comp = min(result.component_scores, key=result.component_scores.get)
+    _insight_box(
+        f"AlphaForge recomienda <strong>{_verdict_es.upper()}</strong> para <strong>{page_ticker}</strong> "
+        f"con una puntuación de <strong>{result.total_score:.0f}/100</strong> y "
+        f"confianza del <strong>{result.confidence:.0%}</strong>. "
+        f"Fortaleza principal: <strong>{_best_comp}</strong> "
+        f"({result.component_scores[_best_comp]:.0f}/100). "
+        f"Área débil: <strong>{_worst_comp}</strong> "
+        f"({result.component_scores[_worst_comp]:.0f}/100)."
+    )
 
     col1, col2 = st.columns([1.4, 1])
 
@@ -2350,7 +2716,7 @@ def page_alpha():
             textposition="outside",
         ))
         fig.update_layout(
-            template="plotly_dark",
+            template="plotly_white",
             xaxis=dict(range=[0, 110]),
             height=320,
             margin=dict(l=0, r=0, t=10, b=0),
@@ -2372,10 +2738,10 @@ def page_alpha():
             marker=dict(colors=["#1D9E75", "#534AB7", "#1D9E75", "#BA7517", "#534AB7", "#D85A30"]),
         ))
         fig2.update_layout(
-            template="plotly_dark",
+            template="plotly_white",
             showlegend=False,
             annotations=[dict(text=f"{result.total_score:.0f}", x=0.5, y=0.5,
-                              font_size=26, showarrow=False, font_color="white")],
+                              font_size=26, showarrow=False, font_color="#0F172A")],
             height=320,
             margin=dict(l=0, r=0, t=10, b=0),
         )
@@ -2386,11 +2752,11 @@ def page_alpha():
 
 
 def page_demo_portfolio():
-    """Paper-trading portfolio: monitor P&L, execute simulated trades, view history."""
-    st.title("Demo Portfolio")
-    st.caption(
-        "Paper-trading account — $100,000 initial capital, no real money involved. "
-        "Prices are fetched live; P&L updates on every page refresh."
+    """Paper-trading portfolio with setup wizard, live P&L, trades and history."""
+    _page_header(
+        "Demo Portfolio",
+        "Portafolio de papel con $100,000 de capital inicial. Importa tus posiciones actuales, "
+        "monitorea P&L en tiempo real y ejecuta órdenes simuladas sin dinero real.",
     )
 
     demo = DemoPortfolio()
@@ -2409,45 +2775,134 @@ def page_demo_portfolio():
 
     # ── Top metrics row ───────────────────────────────────────────────────────
     m1, m2, m3, m4, m5 = st.columns(5)
-    ret_color = "#1D9E75" if snap["total_return"] >= 0 else "#D85A30"
     m1.metric(
-        "Portfolio Value",
+        "Valor del Portafolio",
         f"${snap['total_value']:,.2f}",
         delta=f"${snap['total_return']:+,.2f}",
         delta_color="normal",
     )
     m2.metric(
-        "Total Return",
+        "Retorno Total",
         f"{snap['total_return_pct']:+.2f}%",
-        help=f"vs ${DEMO_INITIAL_CASH:,.0f} initial capital",
+        help=f"vs ${DEMO_INITIAL_CASH:,.0f} capital inicial",
     )
-    m3.metric("Cash", f"${snap['cash']:,.2f}", help=f"{snap['cash_pct']:.1f}% of portfolio")
-    m4.metric("Unrealized P&L", f"${snap['unrealized_pnl']:+,.2f}",
+    m3.metric("Efectivo", f"${snap['cash']:,.2f}", help=f"{snap['cash_pct']:.1f}% del portafolio")
+    m4.metric("P&L No Realizado", f"${snap['unrealized_pnl']:+,.2f}",
               delta=f"{snap['unrealized_pnl_pct']:+.2f}%")
-    m5.metric("Open Positions", snap["n_positions"])
+    m5.metric("Posiciones Abiertas", snap["n_positions"])
+
+    # Portfolio summary insight
+    portfolio_insight = _gen_portfolio_insights(snap)
+    if portfolio_insight:
+        _insight_box(portfolio_insight)
 
     st.divider()
 
     # ── Tabs ──────────────────────────────────────────────────────────────────
-    dp_tab1, dp_tab2, dp_tab3 = st.tabs(["📋 Positions", "📝 Trade", "📜 History"])
+    dp_tab0, dp_tab1, dp_tab2, dp_tab3 = st.tabs([
+        "⚙ Configurar Portafolio", "📋 Posiciones", "📝 Operar", "📜 Historial"
+    ])
+
+    # ── TAB 0: Setup / Import ─────────────────────────────────────────────────
+    with dp_tab0:
+        st.markdown("#### Importar posiciones existentes")
+        st.markdown(
+            '<p class="page-description">Ingresa las acciones que ya tienes y el capital '
+            'invertido en cada una. Cada fila agrega una posición al portafolio.</p>',
+            unsafe_allow_html=True,
+        )
+
+        # Single-position quick add
+        with st.form("setup_form", clear_on_submit=True):
+            sa1, sa2, sa3, sa4 = st.columns([2, 2, 2, 1])
+            with sa1:
+                setup_ticker = st.text_input(
+                    "Ticker", placeholder="NVDA", key="setup_ticker"
+                ).upper().strip()
+            with sa2:
+                setup_shares = st.number_input(
+                    "Acciones", min_value=0.001, step=1.0, value=1.0, key="setup_shares"
+                )
+            with sa3:
+                setup_price = st.number_input(
+                    "Precio promedio ($)", min_value=0.01, step=0.01, value=100.0, key="setup_price"
+                )
+            with sa4:
+                st.markdown("<div style='height:28px'></div>", unsafe_allow_html=True)
+                submitted_setup = st.form_submit_button("➕ Agregar", type="primary")
+
+        if submitted_setup:
+            if setup_ticker:
+                ok, msg = demo.buy(setup_ticker, setup_shares, setup_price)
+                if ok:
+                    st.success(f"✓ {setup_ticker} agregado: {setup_shares:g} acciones @ ${setup_price:.2f}")
+                else:
+                    st.error(msg)
+            else:
+                st.warning("Ingresa un símbolo de ticker.")
+
+        st.divider()
+
+        # Bulk import via text area
+        st.markdown("**Importación rápida (múltiples posiciones)**")
+        st.caption("Una posición por línea: `TICKER, acciones, precio_promedio`  — Ej: `AAPL, 10, 175.50`")
+        bulk_text = st.text_area(
+            "Posiciones (CSV inline)",
+            placeholder="NVDA, 5, 800.00\nAAPL, 10, 175.50\nMETA, 3, 480.00",
+            height=130,
+            key="bulk_import_text",
+        )
+        if st.button("📥 Importar todas", key="bulk_import_btn", type="primary"):
+            lines = [l.strip() for l in bulk_text.strip().splitlines() if l.strip()]
+            imported, errors = 0, []
+            for line in lines:
+                parts = [p.strip() for p in line.split(",")]
+                if len(parts) != 3:
+                    errors.append(f"Formato incorrecto: `{line}`")
+                    continue
+                try:
+                    tkr = parts[0].upper()
+                    shr = float(parts[1])
+                    prc = float(parts[2])
+                    ok, msg = demo.buy(tkr, shr, prc)
+                    if ok:
+                        imported += 1
+                    else:
+                        errors.append(f"{tkr}: {msg}")
+                except ValueError:
+                    errors.append(f"Valor inválido: `{line}`")
+            if imported:
+                st.success(f"✓ {imported} posición(es) importada(s) correctamente.")
+            for e in errors:
+                st.error(e)
+
+        st.divider()
+        st.markdown("**Restablecer portafolio**")
+        st.caption("Elimina todas las posiciones, órdenes e historial — restaura $100,000 en efectivo.")
+        if st.button("🗑 Restablecer a $100,000", key="demo_reset_btn"):
+            if "confirm_reset" not in st.session_state:
+                st.session_state.confirm_reset = True
+                st.warning("Haz clic en **Confirmar** para continuar, o recarga la página para cancelar.")
+            if st.button("⚠ Confirmar Reset", key="demo_confirm_reset_btn", type="primary"):
+                demo.reset()
+                st.success("Portafolio restablecido a $100,000.")
+                st.session_state.pop("confirm_reset", None)
 
     # ── TAB 1: Positions ──────────────────────────────────────────────────────
     with dp_tab1:
         if not snap["positions"]:
             st.info(
-                "No open positions. Switch to the **Trade** tab to buy your first asset."
+                "Sin posiciones abiertas. Ve a **Configurar Portafolio** para importar tus acciones "
+                "o a **Operar** para crear tu primera orden."
             )
         else:
-            # Positions table
             pos_rows = snap["positions"]
             pos_df = pd.DataFrame(pos_rows)
 
             def _color_pnl(val):
-                """Color P&L cells in the dataframe display."""
                 try:
                     v = float(val)
-                    color = "#1D9E75" if v >= 0 else "#D85A30"
-                    return f"color: {color}"
+                    return f"color: {'#10B981' if v >= 0 else '#EF4444'}"
                 except (ValueError, TypeError):
                     return ""
 
@@ -2457,20 +2912,20 @@ def page_demo_portfolio():
                 "unrealized_pnl_pct", "weight_pct",
             ]].copy()
             display_df.columns = [
-                "Ticker", "Shares", "Avg Cost", "Price",
-                "Cost Basis", "Market Value", "Unrealized P&L",
-                "P&L %", "Weight %",
+                "Ticker", "Acciones", "Costo Prom.", "Precio Actual",
+                "Costo Total", "Valor Mercado", "P&L No Realizado",
+                "P&L %", "Peso %",
             ]
 
             styled = (
                 display_df.style
                 .format({
-                    "Avg Cost": "${:.2f}", "Price": "${:.2f}",
-                    "Cost Basis": "${:,.2f}", "Market Value": "${:,.2f}",
-                    "Unrealized P&L": "${:+,.2f}", "P&L %": "{:+.2f}%",
-                    "Weight %": "{:.1f}%",
+                    "Costo Prom.": "${:.2f}", "Precio Actual": "${:.2f}",
+                    "Costo Total": "${:,.2f}", "Valor Mercado": "${:,.2f}",
+                    "P&L No Realizado": "${:+,.2f}", "P&L %": "{:+.2f}%",
+                    "Peso %": "{:.1f}%",
                 })
-                .applymap(_color_pnl, subset=["Unrealized P&L", "P&L %"])
+                .applymap(_color_pnl, subset=["P&L No Realizado", "P&L %"])
             )
             st.dataframe(styled, use_container_width=True, hide_index=True)
 
@@ -2479,57 +2934,74 @@ def page_demo_portfolio():
             # Allocation pie + P&L bar side by side
             pc1, pc2 = st.columns(2)
             with pc1:
-                st.markdown("**Allocation by Market Value**")
+                st.markdown("**Distribución por Valor de Mercado**")
                 fig_alloc = go.Figure(go.Pie(
                     labels=[r["ticker"] for r in pos_rows],
                     values=[r["market_value"] for r in pos_rows],
                     hole=0.5,
                     textinfo="label+percent",
-                    marker=dict(colors=["#1D9E75", "#534AB7", "#BA7517", "#D85A30",
-                                        "#58A6FF", "#888", "#E6EDF3"]),
+                    marker=dict(colors=["#6366F1", "#10B981", "#F59E0B", "#EF4444",
+                                        "#3B82F6", "#8B5CF6", "#EC4899"]),
                 ))
                 fig_alloc.update_layout(
-                    template="plotly_dark", height=300,
+                    template="plotly_white", paper_bgcolor="white", height=300,
                     showlegend=False, margin=dict(l=0, r=0, t=10, b=0),
                 )
                 st.plotly_chart(fig_alloc, use_container_width=True)
+                # Allocation insight
+                biggest = max(pos_rows, key=lambda r: r["weight_pct"])
+                _insight_box(
+                    f"<strong>{biggest['ticker']}</strong> representa el mayor peso del portafolio "
+                    f"con <strong>{biggest['weight_pct']:.1f}%</strong> del valor total invertido."
+                )
 
             with pc2:
-                st.markdown("**Unrealized P&L by Position**")
+                st.markdown("**P&L No Realizado por Posición**")
                 pnl_vals = [r["unrealized_pnl"] for r in pos_rows]
                 fig_pnl = go.Figure(go.Bar(
                     x=[r["ticker"] for r in pos_rows],
                     y=pnl_vals,
-                    marker_color=["#1D9E75" if v >= 0 else "#D85A30" for v in pnl_vals],
-                    text=[f"${v:+,.2f}" for v in pnl_vals],
+                    marker_color=["#10B981" if v >= 0 else "#EF4444" for v in pnl_vals],
+                    text=[f"${v:+,.0f}" for v in pnl_vals],
                     textposition="outside",
                 ))
                 fig_pnl.update_layout(
-                    template="plotly_dark", height=300,
-                    yaxis_title="P&L ($)", margin=dict(l=0, r=0, t=10, b=0),
+                    template="plotly_white", paper_bgcolor="white", plot_bgcolor="#FAFBFC",
+                    height=300, yaxis_title="P&L ($)", margin=dict(l=0, r=0, t=10, b=0),
                 )
+                fig_pnl.update_xaxes(gridcolor="#E2E8F0")
+                fig_pnl.update_yaxes(gridcolor="#E2E8F0")
                 st.plotly_chart(fig_pnl, use_container_width=True)
+                # P&L insight
+                best_pos = max(pos_rows, key=lambda r: r["unrealized_pnl_pct"])
+                worst_pos = min(pos_rows, key=lambda r: r["unrealized_pnl_pct"])
+                _insight_box(
+                    f"Mayor ganador: <strong>{best_pos['ticker']}</strong> "
+                    f"({best_pos['unrealized_pnl_pct']:+.1f}%) · "
+                    f"Mayor rezagado: <strong>{worst_pos['ticker']}</strong> "
+                    f"({worst_pos['unrealized_pnl_pct']:+.1f}%)."
+                )
 
     # ── TAB 2: Trade ──────────────────────────────────────────────────────────
     with dp_tab2:
         tc1, tc2 = st.columns(2)
 
         with tc1:
-            st.markdown("**Buy**")
+            st.markdown("**Comprar**")
             with st.form("buy_form", clear_on_submit=True):
                 buy_ticker = st.text_input(
-                    "Ticker", placeholder="e.g. AAPL"
+                    "Ticker", placeholder="AAPL"
                 ).upper().strip()
-                buy_shares = st.number_input("Shares", min_value=0.001, step=1.0, value=1.0)
+                buy_shares = st.number_input("Acciones", min_value=0.001, step=1.0, value=1.0)
                 buy_price  = st.number_input(
-                    "Price per share ($)", min_value=0.01, step=0.01, value=100.0
+                    "Precio por acción ($)", min_value=0.01, step=0.01, value=100.0
                 )
                 buy_cost_preview = buy_shares * buy_price
                 st.caption(
-                    f"Estimated total: **${buy_cost_preview:,.2f}** · "
-                    f"Cash available: ${snap['cash']:,.2f}"
+                    f"Total estimado: **${buy_cost_preview:,.2f}** · "
+                    f"Efectivo disponible: ${snap['cash']:,.2f}"
                 )
-                submitted_buy = st.form_submit_button("Execute Buy", type="primary")
+                submitted_buy = st.form_submit_button("Ejecutar Compra", type="primary")
 
             if submitted_buy:
                 if buy_ticker:
@@ -2539,28 +3011,28 @@ def page_demo_portfolio():
                     else:
                         st.error(msg)
                 else:
-                    st.warning("Enter a ticker symbol.")
+                    st.warning("Ingresa un ticker.")
 
         with tc2:
-            st.markdown("**Sell**")
+            st.markdown("**Vender**")
             if not pos_tickers:
-                st.info("No positions to sell.")
+                st.info("Sin posiciones para vender.")
             else:
                 with st.form("sell_form", clear_on_submit=True):
                     sell_ticker = st.selectbox("Ticker", pos_tickers)
                     current_held = float(demo.positions.get(sell_ticker, {}).get("shares", 0))
-                    st.caption(f"Currently holding: {current_held:g} shares")
+                    st.caption(f"Tenencia actual: {current_held:g} acciones")
                     sell_shares = st.number_input(
-                        "Shares to sell", min_value=0.001, max_value=float(current_held),
+                        "Acciones a vender", min_value=0.001, max_value=float(current_held),
                         step=1.0, value=min(1.0, current_held),
                     )
                     sell_price = st.number_input(
-                        "Price per share ($)", min_value=0.01, step=0.01,
+                        "Precio por acción ($)", min_value=0.01, step=0.01,
                         value=float(snap_prices.get(sell_ticker, 100.0)),
                     )
                     proceeds_preview = sell_shares * sell_price
-                    st.caption(f"Estimated proceeds: **${proceeds_preview:,.2f}**")
-                    submitted_sell = st.form_submit_button("Execute Sell", type="primary")
+                    st.caption(f"Ingresos estimados: **${proceeds_preview:,.2f}**")
+                    submitted_sell = st.form_submit_button("Ejecutar Venta", type="primary")
 
                 if submitted_sell:
                     ok, msg = demo.sell(sell_ticker, sell_shares, sell_price)
@@ -2569,63 +3041,49 @@ def page_demo_portfolio():
                     else:
                         st.error(msg)
 
-        st.divider()
-        st.markdown("**Reset Portfolio**")
-        st.caption(
-            "Wipes all positions, trades, and history — restores $100,000 cash. "
-            "This cannot be undone."
-        )
-        if st.button("🗑 Reset to $100,000 Cash", key="demo_reset_btn"):
-            if "confirm_reset" not in st.session_state:
-                st.session_state.confirm_reset = True
-                st.warning("Click **Confirm Reset** to proceed, or refresh the page to cancel.")
-            if st.button("⚠ Confirm Reset", key="demo_confirm_reset_btn", type="primary"):
-                demo.reset()
-                st.success("Portfolio reset to $100,000 cash.")
-                del st.session_state["confirm_reset"]
-
     # ── TAB 3: History ────────────────────────────────────────────────────────
     with dp_tab3:
         trades = demo.get_trades()
         if not trades:
-            st.info("No trades yet. Use the Trade tab to execute your first order.")
+            st.info("Sin operaciones aún. Usa la pestaña **Operar** para ejecutar tu primera orden.")
         else:
             trades_df = pd.DataFrame(trades)
             display_trades = trades_df[[
                 "timestamp", "action", "ticker", "shares", "price", "total", "cash_after",
             ]].copy()
             display_trades.columns = [
-                "Timestamp", "Action", "Ticker", "Shares", "Price ($)", "Total ($)", "Cash After ($)"
+                "Fecha/Hora", "Acción", "Ticker", "Acciones", "Precio ($)", "Total ($)", "Efectivo tras op."
             ]
 
             def _color_action(val):
-                return "color: #1D9E75" if val == "BUY" else "color: #D85A30"
+                return "color: #10B981" if val == "BUY" else "color: #EF4444"
 
             styled_trades = (
                 display_trades.style
                 .format({
-                    "Price ($)": "${:.2f}",
+                    "Precio ($)": "${:.2f}",
                     "Total ($)": "${:,.2f}",
-                    "Cash After ($)": "${:,.2f}",
+                    "Efectivo tras op.": "${:,.2f}",
                 })
-                .applymap(_color_action, subset=["Action"])
+                .applymap(_color_action, subset=["Acción"])
             )
             st.dataframe(styled_trades, use_container_width=True, hide_index=True)
+
+            th1, th2, th3 = st.columns(3)
+            buys  = sum(1 for t in trades if t["action"] == "BUY")
+            sells = len(trades) - buys
+            th1.metric("Total Operaciones", len(trades))
+            th2.metric("Compras / Ventas", f"{buys} / {sells}")
+            th3.metric("Capital Desplegado", f"${sum(t['total'] for t in trades if t['action']=='BUY'):,.0f}")
 
             st.divider()
             csv_data = trades_df.to_csv(index=False).encode("utf-8")
             st.download_button(
-                "⬇ Download Trade History (CSV)",
+                "⬇ Descargar historial (CSV)",
                 data=csv_data,
                 file_name="alphaforge_demo_trades.csv",
                 mime="text/csv",
             )
-
-            th1, th2 = st.columns(2)
-            th1.metric("Total Trades", len(trades))
-            buys  = sum(1 for t in trades if t["action"] == "BUY")
-            sells = len(trades) - buys
-            th2.metric("Buys / Sells", f"{buys} / {sells}")
 
 
 # ── Sports Betting ───────────────────────────────────────────────────────────
@@ -2681,10 +3139,10 @@ def page_sports_betting() -> None:
     # ── Header ────────────────────────────────────────────────────────────────
     h_col, api_col = st.columns([3, 1])
     with h_col:
-        st.title("⚽ Sports Betting — Value Analysis")
-        st.caption(
-            "Identify mispriced odds using Expected Value, Kelly Criterion, and the "
-            "independent Poisson model. This is a mathematical tool, not tipster advice."
+        _page_header(
+            "⚽ Sports Betting — Análisis de Valor",
+            "Detecta cuotas mal valuadas con Expected Value, Kelly Criterion y el modelo "
+            "de Poisson independiente calibrado con datos históricos. Herramienta matemática — no es consejo de apuesta.",
         )
 
     # ── API key guard ─────────────────────────────────────────────────────────
@@ -2801,9 +3259,9 @@ for value identification.
             quota_color = "#1D9E75" if rem > 100 else "#BA7517" if rem > 50 else "#D85A30"
             st.markdown(
                 f'<div style="text-align:right">'
-                f'<span style="font-size:0.7rem;color:#7D8590;">API quota</span><br>'
+                f'<span style="font-size:0.7rem;color:#64748B;">API quota</span><br>'
                 f'<span style="color:{quota_color};font-weight:700;">{rem}</span>'
-                f'<span style="color:#7D8590;font-size:0.75rem;"> remaining</span></div>',
+                f'<span style="color:#64748B;font-size:0.75rem;"> remaining</span></div>',
                 unsafe_allow_html=True,
             )
         else:
@@ -2889,21 +3347,21 @@ for value identification.
                 for col, ts, label in [(hc, h_str, home_team), (ac, a_str, away_team)]:
                     with col:
                         st.markdown(
-                            f'<div style="background:#161B22;border:1px solid #30363D;'
-                            f'border-radius:8px;padding:12px 16px;margin-bottom:8px;">'
-                            f'<div style="font-weight:700;color:#E6EDF3;font-size:1rem;">{label}</div>',
+                            f'<div style="background:#FFFFFF;border:1px solid #E2E8F0;'
+                            f'border-radius:10px;padding:12px 16px;margin-bottom:8px;">'
+                            f'<div style="font-weight:700;color:#0F172A;font-size:1rem;">{label}</div>',
                             unsafe_allow_html=True,
                         )
                         if ts:
                             # Form badges
                             form_html = " ".join(
                                 f'<span style="background:{form_color(r)};color:#fff;'
-                                f'border-radius:3px;padding:1px 5px;font-weight:700;">{r}</span>'
+                                f'border-radius:4px;padding:2px 6px;font-weight:700;font-size:0.78rem;">{r}</span>'
                                 for r in ts.recent_form
                             )
                             st.markdown(
                                 f'<div style="margin:4px 0 8px;">{form_html}</div>'
-                                f'<div style="color:#7D8590;font-size:0.82rem;">'
+                                f'<div style="color:#64748B;font-size:0.82rem;">'
                                 f'Home: {ts.avg_scored_home:.2f} scored / {ts.avg_conceded_home:.2f} conceded<br>'
                                 f'Away: {ts.avg_scored_away:.2f} scored / {ts.avg_conceded_away:.2f} conceded<br>'
                                 f'Attack ×{ts.attack_home:.2f}H ×{ts.attack_away:.2f}A &nbsp;'
@@ -2913,8 +3371,8 @@ for value identification.
                             )
                         else:
                             st.markdown(
-                                f'<div style="color:#7D8590;font-size:0.82rem;">'
-                                f'No historical data found (name mismatch between APIs)</div></div>',
+                                f'<div style="color:#94A3B8;font-size:0.82rem;">'
+                                f'Sin datos históricos (posible mismatch de nombres entre APIs)</div></div>',
                                 unsafe_allow_html=True,
                             )
 
@@ -2972,7 +3430,7 @@ for value identification.
                 [1.0, "#58A6FF"],
             ],
             showscale=True,
-            colorbar=dict(title="Prob %", tickfont=dict(color="#C9D1D9")),
+            colorbar=dict(title="Prob %", tickfont=dict(color="#64748B")),
         ))
         fig_heat.add_trace(go.Scatter(
             x=[str(i) for i in range(max_disp + 1)],
@@ -2983,15 +3441,15 @@ for value identification.
             showlegend=False,
         ))
         fig_heat.update_layout(
-            template="plotly_dark",
-            paper_bgcolor="#0D1117",
-            plot_bgcolor="#0D1117",
+            template="plotly_white",
+            paper_bgcolor="white",
+            plot_bgcolor="#FAFBFC",
             title=dict(
                 text=f"{home_team} goals (rows) vs {away_team} goals (cols) — probability %",
-                font=dict(color="#C9D1D9", size=13),
+                font=dict(color="#374151", size=13),
             ),
-            xaxis=dict(title=f"{away_team} goals", color="#7D8590", tickcolor="#484F58"),
-            yaxis=dict(title=f"{home_team} goals", color="#7D8590", tickcolor="#484F58"),
+            xaxis=dict(title=f"{away_team} goals", color="#64748B", tickcolor="#CBD5E1"),
+            yaxis=dict(title=f"{home_team} goals", color="#64748B", tickcolor="#CBD5E1"),
             height=420,
             margin=dict(t=50, b=40, l=50, r=20),
         )
@@ -3104,13 +3562,13 @@ for value identification.
             ))
             fig_prob.update_layout(
                 barmode="group",
-                template="plotly_dark",
-                paper_bgcolor="#0D1117",
-                plot_bgcolor="#0D1117",
-                legend=dict(font=dict(color="#C9D1D9")),
-                xaxis=dict(color="#7D8590"),
-                yaxis=dict(title="Probability %", color="#7D8590",
-                           gridcolor="#21262D", range=[0, 100]),
+                template="plotly_white",
+                paper_bgcolor="white",
+                plot_bgcolor="#FAFBFC",
+                legend=dict(font=dict(color="#374151")),
+                xaxis=dict(color="#64748B"),
+                yaxis=dict(title="Probability %", color="#64748B",
+                           gridcolor="#E2E8F0", range=[0, 100]),
                 height=360,
                 margin=dict(t=20, b=30, l=50, r=20),
             )
@@ -3202,11 +3660,11 @@ for value identification.
                     textposition="auto",
                 ))
                 fig_ev.update_layout(
-                    template="plotly_dark",
-                    paper_bgcolor="#0D1117",
-                    plot_bgcolor="#0D1117",
-                    xaxis=dict(title="EV %", color="#7D8590", gridcolor="#21262D"),
-                    yaxis=dict(color="#C9D1D9"),
+                    template="plotly_white",
+                    paper_bgcolor="white",
+                    plot_bgcolor="#FAFBFC",
+                    xaxis=dict(title="EV %", color="#64748B", gridcolor="#E2E8F0"),
+                    yaxis=dict(color="#374151"),
                     height=max(200, len(value_bets) * 45),
                     margin=dict(t=10, b=30, l=180, r=20),
                 )
@@ -3280,12 +3738,12 @@ for value identification.
                         ))
                     fig_k.update_layout(
                         barmode="group",
-                        template="plotly_dark",
-                        paper_bgcolor="#0D1117",
-                        plot_bgcolor="#0D1117",
-                        legend=dict(font=dict(color="#C9D1D9")),
-                        xaxis=dict(color="#7D8590"),
-                        yaxis=dict(title="Stake ($)", color="#7D8590", gridcolor="#21262D"),
+                        template="plotly_white",
+                        paper_bgcolor="white",
+                        plot_bgcolor="#FAFBFC",
+                        legend=dict(font=dict(color="#374151")),
+                        xaxis=dict(color="#64748B"),
+                        yaxis=dict(title="Stake ($)", color="#64748B", gridcolor="#E2E8F0"),
                         height=320,
                         margin=dict(t=10, b=50, l=60, r=20),
                     )
@@ -3342,28 +3800,28 @@ for value identification.
                        "decreasing": {"color": "#1D9E75"},
                        "increasing": {"color": "#D85A30"}},
                 title={"text": "Total Implied Probability %<br><sub>< 100% = arbitrage</sub>",
-                       "font": {"color": "#C9D1D9"}},
+                       "font": {"color": "#374151"}},
                 gauge={
-                    "axis": {"range": [95, 115], "tickcolor": "#484F58",
-                             "tickfont": {"color": "#7D8590"}},
-                    "bar": {"color": "#1D9E75" if margin < 100 else "#D85A30"},
-                    "bgcolor": "#21262D",
-                    "bordercolor": "#30363D",
+                    "axis": {"range": [95, 115], "tickcolor": "#CBD5E1",
+                             "tickfont": {"color": "#64748B"}},
+                    "bar": {"color": "#10B981" if margin < 100 else "#EF4444"},
+                    "bgcolor": "#F8FAFC",
+                    "bordercolor": "#E2E8F0",
                     "steps": [
-                        {"range": [95, 100], "color": "rgba(29,158,117,0.15)"},
-                        {"range": [100, 115], "color": "rgba(216,90,48,0.08)"},
+                        {"range": [95, 100], "color": "rgba(16,185,129,0.12)"},
+                        {"range": [100, 115], "color": "rgba(239,68,68,0.06)"},
                     ],
                     "threshold": {
-                        "line": {"color": "#58A6FF", "width": 3},
+                        "line": {"color": "#6366F1", "width": 3},
                         "thickness": 0.85,
                         "value": 100.0,
                     },
                 },
-                number={"suffix": "%", "font": {"color": "#E6EDF3", "size": 36}},
+                number={"suffix": "%", "font": {"color": "#0F172A", "size": 36}},
             ))
             fig_gauge.update_layout(
-                template="plotly_dark",
-                paper_bgcolor="#0D1117",
+                template="plotly_white",
+                paper_bgcolor="white",
                 height=280,
                 margin=dict(t=20, b=10),
             )
